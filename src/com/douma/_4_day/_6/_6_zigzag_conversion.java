@@ -10,17 +10,19 @@ package com.douma._4_day._6;
 public class _6_zigzag_conversion {
     // 按行访问
     public String convert(String s, int numRows) {
-        StringBuilder sb = new StringBuilder();
-        int delta = 2 * numRows - 2;
+        StringBuilder ret = new StringBuilder();
+
+        int delta = 2 * numRows - 1;
         for (int row = 0; row < numRows; row++) {
             for (int col = 0; col + row < s.length(); col += delta) {
-                sb.append(s.charAt(col + row));
+                int index = col + row;
+                ret.append(s.charAt(index));
                 if (row != 0 && row != numRows - 1 && col + delta - row < s.length()) {
-                    sb.append(s.charAt(col + delta - row));
+                    ret.append(s.charAt(col + delta - row));
                 }
             }
         }
-        return sb.toString();
+        return ret.toString();
     }
     public String convert2(String s, int numRows) {
         StringBuilder[] sbs = new StringBuilder[numRows];
