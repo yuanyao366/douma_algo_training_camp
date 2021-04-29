@@ -19,7 +19,7 @@ public class _238_product_of_array_except_self {
 
         // 每个元素的右边所有元素的乘积存储在一个变量中
         int rightProduct = 1;
-        for (int i = n - 1; i >= 0; i++) {
+        for (int i = n - 1; i >= 0; i--) { // bug 修复：从右往左遍历，这里应该是 --
             // 对于索引 i，左边的乘积为 output[i]，右边的乘积为 rightProduct
             output[i] = output[i] * rightProduct;
             // 更新右边乘积
