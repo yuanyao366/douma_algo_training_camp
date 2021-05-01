@@ -1,16 +1,20 @@
-def rotate (self, nums: List[int], k: int) -> None:
+from typing import List
+
+
+def rotate(self, nums: List[int], k: int) -> None:
     """
     Do not return anything, modify nums in-place instead.
     """
     n = len(nums)
     k = k % n;
-    newArr = [0] * n
+    new_arr = [0] * n
     for i in range(n):
-        newArr[(i + k) % n] = nums[i]
-    nums[:] = newArr
+        new_arr[(i + k) % n] = nums[i]
+    nums[:] = new_arr
 
-##  方案二：环状替换
-def rotate (self, nums: List[int], k: int) -> None:
+
+#  方案二：环状替换
+def rotate(self, nums: List[int], k: int) -> None:
     """
     Do not return anything, modify nums in-place instead.
     """
@@ -28,11 +32,13 @@ def rotate (self, nums: List[int], k: int) -> None:
             if start == current: break
         start += 1
 
-## 方案三：数组旋转
+
+# 方案三：数组旋转
 def reverse(self, nums: List[int], start: int, end: int) -> None:
     while start < end:
         nums[start], nums[end] = nums[end], nums[start]
         start, end = start + 1, end - 1
+
 
 def rotate(self, nums: List[int], k: int) -> None:
     """

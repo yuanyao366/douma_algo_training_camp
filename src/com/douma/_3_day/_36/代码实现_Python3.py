@@ -1,21 +1,30 @@
+from typing import List
+
+
 def isValidSudoku(self, board: List[List[str]]) -> bool:
-    rowUsed = [[False] * 9 for _ in range(9)]
-    colUsed = [[False] * 9 for _ in range(9)]
-    boxUsed = [[False] * 9 for _ in range(9)]
+    row_used = [[False] * 9 for _ in range(9)]
+    col_used = [[False] * 9 for _ in range(9)]
+    box_used = [[False] * 9 for _ in range(9)]
 
     for row in range(len(board)):
         for col in range(len(board[0])):
             if board[row][col] != '.':
                 num = ord(board[row][col]) - ord('1')
 
-                if rowUsed[row][num]: return False
-                else: rowUsed[row][num] = True
+                if row_used[row][num]:
+                    return False
+                else:
+                    row_used[row][num] = True
 
-                if colUsed[col][num]: return False
-                else: colUsed[col][num] = True
+                if col_used[col][num]:
+                    return False
+                else:
+                    col_used[col][num] = True
 
-                boxIndex = row // 3 + (col // 3) * 3
-                if boxUsed[boxIndex][num]: return False
-                else: boxUsed[boxIndex][num] = True
+                box_index = row // 3 + (col // 3) * 3
+                if box_used[box_index][num]:
+                    return False
+                else:
+                    box_used[box_index][num] = True
 
     return True

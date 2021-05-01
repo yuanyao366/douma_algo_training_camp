@@ -1,3 +1,6 @@
+from typing import List
+
+
 def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
     m, n = len(matrix), len(matrix[0])
 
@@ -11,10 +14,10 @@ def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
         res.append(matrix[row][col])
         seen[row][col] = True
 
-        nextRow = row + dirs[di][0]
-        nextCol = col + dirs[di][1]
+        next_row = row + dirs[di][0]
+        next_col = col + dirs[di][1]
 
-        if not (0 <= nextRow < m and 0 <= nextCol < n and not seen[nextRow][nextCol]):
+        if not (0 <= next_row < m and 0 <= next_col < n and not seen[next_row][next_col]):
             di = (di + 1) % 4
 
         row = row + dirs[di][0]
@@ -22,25 +25,26 @@ def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
 
     return res
 
-## 法二：按层模拟
+
+# 法二：按层模拟
 def spiralOrder1(self, matrix: List[List[int]]) -> List[int]:
-    startRow, endRow = 0, len(matrix) - 1
-    startCol, endCol = 0, len(matrix[0]) - 1
+    start_row, end_row = 0, len(matrix) - 1
+    start_col, end_col = 0, len(matrix[0]) - 1
 
     res = list()
-    while startRow <= endRow and startCol <= endCol:
+    while start_row <= end_row and start_col <= end_col:
         # top 行
-        for col in range(startCol, endCol + 1): res.append(matrix[startRow][col])
+        for col in range(start_col, end_col + 1): res.append(matrix[start_row][col])
         # right 列
-        for row in range(startRow + 1, endRow + 1): res.append(matrix[row][endCol])
-        if startRow < endRow and startCol < endCol:
+        for row in range(start_row + 1, end_row + 1): res.append(matrix[row][end_col])
+        if start_row < end_row and start_col < end_col:
             # bottom 行
-            for col in range(endCol - 1, startCol, -1): res.append(matrix[endRow][col])
+            for col in range(end_col - 1, start_col, -1): res.append(matrix[end_row][col])
             # left 列
-            for row in range(endRow, startRow, -1): res.append(matrix[row][startCol])
-        startRow += 1
-        endRow -= 1
-        startCol += 1
-        endCol -= 1
+            for row in range(end_row, start_row, -1): res.append(matrix[row][start_col])
+        start_row += 1
+        end_row -= 1
+        start_col += 1
+        end_col -= 1
 
     return res

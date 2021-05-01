@@ -1,3 +1,6 @@
+from typing import List
+
+
 def addToArrayForm(self, A: List[int], K: int) -> List[int]:
     res = []
     i, carry = len(A) - 1, 0

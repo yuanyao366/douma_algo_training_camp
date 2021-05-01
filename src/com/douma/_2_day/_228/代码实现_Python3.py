@@ -1,3 +1,6 @@
+from typing import List
+
+
 def summaryRanges(self, nums: List[int]) -> List[str]:
     res, i = [], 0
     while i < len(nums):

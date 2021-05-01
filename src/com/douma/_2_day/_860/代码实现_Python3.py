@@ -1,3 +1,6 @@
+from typing import List
+
+
 def lemonadeChange(self, bills: List[int]) -> bool:
     five = ten = 0
     for bill in bills:
@@ -11,5 +14,6 @@ def lemonadeChange(self, bills: List[int]) -> bool:
                 five, ten = five - 1, ten - 1
             elif five >= 3:
                 five -= 3
-            else: return False
+            else:
+                return False
     return True

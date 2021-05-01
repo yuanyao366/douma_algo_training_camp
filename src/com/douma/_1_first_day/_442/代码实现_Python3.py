@@ -1,3 +1,6 @@
+from typing import List
+
+
 def findDuplicates(self, nums: List[int]) -> List[int]:
         res = []
         for x in nums:
@@ -6,7 +9,8 @@ def findDuplicates(self, nums: List[int]) -> List[int]:
             else: nums[index] = -nums[index]
         return res;
 
-## 第二种方法代码实现
+
+# 第二种方法代码实现
 def findDuplicates(self, nums: List[int]) -> List[int]:
         n = len(nums)
         for x in nums:

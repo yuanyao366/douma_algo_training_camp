@@ -1,3 +1,6 @@
+from typing import List
+
+
 def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
     i, l = 0, len(flowerbed)
     while i < l and n > 0:

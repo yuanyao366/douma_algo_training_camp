@@ -1,3 +1,6 @@
+from typing import List
+
+
 def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
     x0, y0 = coordinates[0][0], coordinates[0][1]
     x = coordinates[1][0] - x0

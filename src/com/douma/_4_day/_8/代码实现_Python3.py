@@ -13,11 +13,13 @@ def myAtoi(self, s: str) -> int:
     INT_MAX = 2 ** 31 - 1
     INT_MIN = -2 ** 31
     base = 0
-    while i < n and s[i] >= '0' and s[i] <= '9':
+    while i < n and '0' <= s[i] <= '9':
         if (base > INT_MAX // 10
                 or (base == INT_MAX // 10 and ord(s[i]) - ord('0') > 7)):
-            if sign > 0: return INT_MAX
-            else: return INT_MIN
+            if sign > 0:
+                return INT_MAX
+            else:
+                return INT_MIN
         base = base * 10 + ord(s[i]) - ord('0')
         i += 1
 

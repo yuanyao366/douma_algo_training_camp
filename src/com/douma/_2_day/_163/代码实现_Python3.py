@@ -1,3 +1,6 @@
+from typing import List
+
+
 def findMissingRanges(self, nums: List[int], lower: int, upper: int) -> List[str]:
     res = []
     pre = lower - 1

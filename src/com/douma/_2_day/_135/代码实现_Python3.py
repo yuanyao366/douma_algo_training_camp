@@ -1,3 +1,6 @@
+from typing import List
+
+
 def candy(self, ratings: List[int]) -> int:
     n = len(ratings)
     left2right = [1] * n

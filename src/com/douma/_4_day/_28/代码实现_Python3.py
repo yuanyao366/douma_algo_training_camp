@@ -1,3 +1,6 @@
+from typing import List
+
+
 # 字符串匹配算法：暴力解法、RK 算法、BM 算法、KMP 算法
 # 详细参见：课程 A：应用篇 -> 字符串匹配
 
@@ -13,6 +16,7 @@ def strStr(self, haystack: str, needle: str) -> int:
             return i
     return -1
 
+
 # KMP
 # 时间复杂度：O(m + n)
 # 空间复杂度：O(n)
@@ -21,7 +25,7 @@ def strStr(self, haystack: str, needle: str) -> int:
     if n == 0: return 0
     if m < n: return -1
 
-    nexts, j = self.getNexts(needle), 0
+    nexts, j = self.get_nexts(needle), 0
     for i in range(m):
         while j > 0 and haystack[i] != needle[j]:
             j = nexts[j - 1] + 1
@@ -29,7 +33,8 @@ def strStr(self, haystack: str, needle: str) -> int:
         if j == n: return i - n + 1
     return -1
 
-def getNexts(self, needle: str) -> List[int]:
+
+def get_nexts(self, needle: str) -> List[int]:
     n = len(needle)
     if n == 1: return []
     nexts = [0] * (n - 1)
@@ -41,4 +46,3 @@ def getNexts(self, needle: str) -> List[int]:
         if needle[pre + 1] == needle[j]: pre += 1
         nexts[j] = pre
     return nexts
-

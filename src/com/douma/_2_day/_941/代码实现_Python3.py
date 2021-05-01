@@ -1,3 +1,6 @@
+from typing import List
+
+
 def validMountainArray(self, arr: List[int]) -> bool:
     n, i = len(arr), 0
     # 1. 找到最高点

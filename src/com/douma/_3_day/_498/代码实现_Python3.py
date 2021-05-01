@@ -1,6 +1,10 @@
+from typing import List
+
+
 def findDiagonalOrder(self, matrix: List[List[int]]) -> List[int]:
     m = len(matrix)
-    if m == 0: return list()
+    if m == 0:
+        return list()
     n = len(matrix[0])
     result = [0] * (m * n)
     row = col = d = 0
