@@ -49,7 +49,7 @@ public class _459_repeated_substring_pattern {
             if (n % len == 0) {
                 boolean matched = true;
                 int i = 0;
-                for (int j = len; j < n; j++) {
+                for (int j = len; j < n; j++, i++) { // bug 修复：i 也需要加加
                     if (s.charAt(i) != s.charAt(j)) {
                         matched = false;
                         break;

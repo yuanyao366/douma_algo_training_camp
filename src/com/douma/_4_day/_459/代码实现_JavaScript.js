@@ -4,9 +4,9 @@ var repeatedSubstringPattern = function(s) {
 
 var repeatedSubstringPattern1 = function(s) {
     const n = s.length
-    for (let i = 1; i * 2 <= n; i++) {
-        if (n % i == 0) {
-            if (s.slice(0, i).repeat(n / i) == s) return true
+    for (let len = 1; len * 2 <= n; len++) {
+        if (n % len == 0) {
+            if (s.slice(0, len).repeat(n / len) == s) return true
         }
     }
     return false

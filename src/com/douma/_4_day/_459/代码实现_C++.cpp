@@ -5,11 +5,12 @@ public:
 
     bool repeatedSubstringPattern1(string s) {
         int n = s.size();
-        for (int i = 1; i * 2 <= n; i++) {
-            if (n % i == 0) {
+        for (int len = 1; len * 2 <= n; len++) {
+            if (n % len == 0) {
                 bool matched = true;
-                for (int j = i; j < n; j++) {
-                    if (s[j] != s[j - i]) {
+                int i = 0;
+                for (int j = len; j < n; j++, i++) {
+                    if (s[i] != s[j]) {
                         matched = false;
                         break;
                     }
