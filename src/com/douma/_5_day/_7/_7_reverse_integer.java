@@ -28,10 +28,10 @@ public class _7_reverse_integer {
             x = x / 10;
             // MAX_VALUE = 2^31 - 1 = 2147483647
             if (res > Integer.MAX_VALUE / 10
-                    || (res == Integer.MAX_VALUE && pop > 7)) return 0;
+                    || (res == Integer.MAX_VALUE / 10 && pop > 7)) return 0; // bug 修复：这里是除以 10
             // MIN_VALUE = -2^31 = -2147483648
             if (res < Integer.MIN_VALUE / 10
-                    || (res == Integer.MIN_VALUE && pop < -8)) return 0;
+                    || (res == Integer.MIN_VALUE  / 10 && pop < -8)) return 0;
             res = res * 10 + pop;
         }
         return res;
