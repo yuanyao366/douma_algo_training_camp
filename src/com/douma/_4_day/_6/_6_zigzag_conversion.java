@@ -26,6 +26,8 @@ public class _6_zigzag_conversion {
     }
     public String convert2(String s, int numRows) {
         StringBuilder[] sbs = new StringBuilder[numRows];
+        // bug 修复：需要初始化 StringBuilder 数组
+        for (int i = 0; i < numRows; i++) sbs[i] = new StringBuilder();
 
         int currRow = 0;
         boolean goingDown = false;
@@ -45,6 +47,8 @@ public class _6_zigzag_conversion {
 
     public String convert1(String s, int numRows) {
         StringBuilder[] sbs = new StringBuilder[numRows];
+        // bug 修复：需要初始化 StringBuilder 数组
+        for (int i = 0; i < numRows; i++) sbs[i] = new StringBuilder();
 
         int n = s.length();
         int i = 0;
