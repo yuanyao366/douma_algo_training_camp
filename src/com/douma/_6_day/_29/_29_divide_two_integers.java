@@ -17,7 +17,12 @@ public class _29_divide_two_integers {
         int res = 0;
 
         for (int i = 31; i >= 0; i--) {
-            if ((a >>> i) >= b) {
+            // bug 修复：如果使用 (a >>> i) >= b 的话，当 b = -2147483648 会出错
+            // 因为 Math.abs(-2147483648) = -2147483648
+            // 如果 (a >>> i) >= -2147483648，这个永远返回 true
+            // 而 (a >>> i) - (-2147483648) >= 0 返回的是 false，这个是我们需要的，
+            // 因为任何整形都是小于 2147483648 的，这个我们需要将 -2147483648 看成 2147483648
+            if ((a >>> i) - b >= 0) {
                 a = a - (b << i);
                 res += 1 << i;
             }
@@ -72,6 +77,6 @@ public class _29_divide_two_integers {
 
         System.out.println(a - 4);
 
-        System.out.println(new _29_divide_two_integers().divide(-2147483648, -2147483648));
+        System.out.println(new _29_divide_two_integers().divide(-1010369383, -2147483648));
     }
 }
