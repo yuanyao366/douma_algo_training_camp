@@ -35,7 +35,8 @@ public class _1002_find_common_characters {
         List<String> ans = new ArrayList<>();
         for (int i = 0; i < 26; i++) {
             for (int j = 0; j < minfreq[i]; j++) {
-                ans.add(String.valueOf((char)i + 'a'));
+                // bug 修复：数字转字符需要括起来
+                ans.add(String.valueOf((char)(i + 'a')));
             }
         }
         return ans;
