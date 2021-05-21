@@ -27,7 +27,8 @@ public class _73_set_matrix_zeroes {
             }
         }
 
-        for (int row = m - 1; row >= 0; row++) {
+        // bug 修复：row--
+        for (int row = m - 1; row >= 0; row--) {
             for (int col = 1; col < n; col++) {
                 if (matrix[0][col] == 0 || matrix[row][0] == 0) {
                     matrix[row][col] = 0;
