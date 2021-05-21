@@ -20,7 +20,8 @@ public class _48_rotate_image {
         }
         // 主对角线翻转
         for (int row = 0; row < n; row++) {
-            for (int col = 0; col < n; col++) {
+            // bug 修复：到 row 为止即可，要不然就翻转回来了
+            for (int col = 0; col < row; col++) {
                 int tmp = matrix[row][col];
                 matrix[row][col] = matrix[col][row];
                 matrix[col][row] = tmp;
