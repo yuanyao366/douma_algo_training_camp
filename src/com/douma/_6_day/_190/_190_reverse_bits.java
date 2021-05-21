@@ -13,13 +13,13 @@ public class _190_reverse_bits {
     private static final int M4 = 0x0f0f0f0f; // 00001111000011110000111100001111
     private static final int M8 = 0x00ff00ff; // 00000000111111110000000011111111
 
-    public int reverseBits(int n) {
-        n = (n >>> 1) & M1 | (n & M1) << 1; // 每两位进行交换
-        n = (n >>> 1) & M2 | (n & M2) << 1; // 每四位进行交换
-        n = (n >>> 1) & M4 | (n & M4) << 1; // 每八位进行交换
-        n = (n >>> 1) & M8 | (n & M8) << 1; // 每十六位进行交换
-        // 32 位的前后交换
-        return n >>> 16 | n << 16;
+    // bug 修复：需要加上括号，要不然有问题，
+    public int reverseBits2(int n) {
+        n = ((n >>> 1) & M1) | ((n & M1) << 1); // 每两位进行交换
+        n = ((n >>> 2) & M2) | ((n & M2) << 2); // 每四位进行交换
+        n = ((n >>> 4) & M4) | ((n & M4) << 4); // 每八位进行交换
+        n = ((n >>> 8) & M8) | ((n & M8) << 8); // 每十六位进行交换
+        return (n >>> 16) | (n << 16); // 32 位的前后交换
     }
 
     public int reverseBits1(int n) {
