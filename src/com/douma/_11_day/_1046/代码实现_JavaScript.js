@@ -24,18 +24,18 @@ var lastStoneWeight = function(stones) {
     if (n == 1) return stones[0]
 
     // 使用 ES6 的优先队列：https://github.com/datastructures-js/priority-queue
-    const pq = new MaxPriorityQueue()
+    const pq = new MaxPriorityQueue({priority: (num) => num})
     for (const stone of stones) {
-        pq.enqueue('x', stone)
+        pq.enqueue(stone)
     }
 
     while (pq.size() > 1) {
-        const y = pq.dequeue()['priority']
-        const x = pq.dequeue()['priority']
+        const y = pq.dequeue()['element']
+        const x = pq.dequeue()['element']
         if (x != y) {
-            pq.enqueue('x', y - x)
+            pq.enqueue(y - x)
         }
     }
 
-    return pq.isEmpty() ? 0 : pq.dequeue()['priority']
+    return pq.isEmpty() ? 0 : pq.front()['element']
 };

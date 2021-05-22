@@ -9,6 +9,7 @@
 var findKthLargest1 = function(nums, k) {
     const n = nums.length
     if (k < n - k) {
+        // 使用 ES6 的优先队列：https://github.com/datastructures-js/priority-queue
         const pq = new MinPriorityQueue({priority: (num) => num})
         for (let i = 0; i < k; i++) {
             pq.enqueue(nums[i])
