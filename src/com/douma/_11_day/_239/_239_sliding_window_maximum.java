@@ -1,5 +1,9 @@
 package com.douma._11_day._239;
 
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+
 /**
  * @官方网站 : https://douma.ke.qq.com
  * @微信公众号 : 抖码课堂
@@ -34,7 +38,8 @@ public class _239_sliding_window_maximum {
      */
 
     // 暴力解法
-    public int[] maxSlidingWindow(int[] nums, int k) {
+    // O((n-k)*k)
+    public int[] maxSlidingWindow1(int[] nums, int k) {
         int n = nums.length;
         int[] ans = new int[n - k + 1];
         for (int i = 0; i < n - k + 1; i++) {
@@ -43,6 +48,54 @@ public class _239_sliding_window_maximum {
                 maxNum = Math.max(maxNum, nums[j]);
             }
             ans[i] = maxNum;
+        }
+        return ans;
+    }
+
+    // 优先队列
+    // 时间复杂度：O(nlogn)
+    // 空间复杂度：O(n)
+    public int[] maxSlidingWindow2(int[] nums, int k) {
+        PriorityQueue<int[]> pq
+                = new PriorityQueue<>((a, b) -> a[0] != b[0] ? b[0] - a[0] : b[1] - a[1]);
+        for (int i = 0; i < k; i++) {
+            pq.add(new int[]{nums[i], i});
+        }
+
+        int[] ans = new int[nums.length - k + 1];
+        ans[0] = pq.peek()[0];
+        for (int i = k; i < nums.length; i++) {
+            pq.add(new int[]{nums[i], i});
+            while (pq.peek()[1] <= i - k) {
+                pq.remove();
+            }
+            ans[i - k + 1] = pq.peek()[0];
+        }
+
+        return ans;
+    }
+
+    // 双端队列
+    // 时间复杂度：O(n)
+    // 空间复杂度：O(n)
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        int[] ans = new int[n - k + 1];
+        Deque<Integer> deque = new LinkedList<>();
+        for (int i = 0; i < nums.length; i++) {
+            // 保证队列里面最多只有 k 个元素
+            while (!deque.isEmpty() && deque.peek() <= i - k) {
+                deque.poll();
+            }
+            // 如果当前的滑动窗口中有两个下标 i 和 j，其中 i 在 j 的左侧（i < j），并且 i 对应的元素不大于 j 对应的元素（nums[i]≤nums[j]）
+            // 当滑动窗口向右移动时，只要 i 还在窗口中，那么 j 一定也还在窗口中
+            // 由于 nums[j] 的存在，nums[i] 一定不会是滑动窗口中的最大值了，我们可以将 nums[i] 永久地移除
+            while (!deque.isEmpty() && nums[i] > nums[deque.peekLast()]) {
+                deque.pollLast();
+            }
+            deque.offer(i);
+
+            if (i >= k - 1) ans[i - k + 1] = nums[deque.peek()];
         }
         return ans;
     }
