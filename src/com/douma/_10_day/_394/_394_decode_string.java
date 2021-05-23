@@ -50,7 +50,9 @@ public class _394_decode_string {
                 num = 0;
             } else if (c == ']') {
                 String item = res.toString();
-                for (int i = 1; i < numStack.pop(); i++) {
+                // bug 修复：numStack.pop() 不应该放在 for 循环的比较地方，这样的话，会将所有的栈顶元素弹出
+                int itemCnt = numStack.pop();
+                for (int i = 1; i < itemCnt; i++) {
                     res.append(item);
                 }
                 res.insert(0, strStack.pop());
