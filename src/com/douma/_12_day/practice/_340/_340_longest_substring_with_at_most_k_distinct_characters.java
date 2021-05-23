@@ -13,6 +13,7 @@ import java.util.Map;
  */
 public class _340_longest_substring_with_at_most_k_distinct_characters {
     /* leetcode 340. 至多包含 K 个不同字符的最长子串
+    备注： 159 号算法题的升级版
     给定一个字符串 s ，找出 至多 包含 k 个不同字符的最长子串 T。
 
     示例 1:
