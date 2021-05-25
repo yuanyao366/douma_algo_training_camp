@@ -60,7 +60,8 @@ public class _6_zigzag_conversion {
             }
 
             // 右前向上
-            for (int idx = numRows - 2; idx >= 1 && i < n; idx++) {
+            // bug 修复：idx--
+            for (int idx = numRows - 2; idx >= 1 && i < n; idx--) {
                 sbs[idx].append(s.charAt(i));
                 i++;
             }
