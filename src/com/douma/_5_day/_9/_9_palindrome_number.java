@@ -35,10 +35,10 @@ public class _9_palindrome_number {
             // 反转整数的时候，可能出现溢出
             // MAX_VALUE = 2^31 - 1 = 2147483647
             if (res > Integer.MAX_VALUE / 10
-                    || (res == Integer.MAX_VALUE && pop > 7)) return false;
+                    || (res == Integer.MAX_VALUE / 10 && pop > 7)) return false; // bug 修复：这里是除以 10
             // MIN_VALUE = -2^31 = -2147483648
             if (res < Integer.MIN_VALUE / 10
-                    || (res == Integer.MIN_VALUE && pop < -8)) return false;
+                    || (res == Integer.MIN_VALUE / 10 && pop < -8)) return false; // bug 修复：这里是除以 10
             res = res * 10 + pop;
         }
 
