@@ -64,7 +64,7 @@ public class _41_first_missing_positive {
         return nums.length + 1;
     }
 
-    // 暴力解法
+    // 暴力解法 超时
     public int firstMissingPositive1(int[] nums) {
         for (int i = 1; i <= nums.length; i++) {
             boolean isExits = false;

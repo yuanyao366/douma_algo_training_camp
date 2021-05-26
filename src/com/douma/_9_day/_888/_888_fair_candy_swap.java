@@ -65,7 +65,8 @@ public class _888_fair_candy_swap {
             int x = y + delta;
             if (set.contains(x)) {
                 ans[0] = x;
-                ans[y] = y;
+                // bug 修复：将 y 设置给第二个元素
+                ans[1] = y;
                 break;
             }
         }

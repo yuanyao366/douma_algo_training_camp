@@ -37,8 +37,9 @@ public class _290_word_pattern {
         for (int i = 0; i < pattern.length(); i++) {
             Character c = pattern.charAt(i);
             String word = words[i];
-            if ((char2Word.containsKey(c) && char2Word.get(c) != word) ||
-                    word2Char.containsKey(word) && word2Char.get(word) != c) {
+            // bug 修复：字符串需要使用 equals 方法比较
+            if ((char2Word.containsKey(c) && !char2Word.get(c).equals(word)) ||
+                    word2Char.containsKey(word) && !word2Char.get(word).equals(c)) {
                 return false;
             }
             char2Word.put(c, word);
