@@ -87,7 +87,8 @@ public class _456_132_pattern {
         }
 
         // O(nlogn)
-        for (int j = 1; j < n; j++) {
+        // bug 修复：j 到倒数第二个为止
+        for (int j = 1; j < n - 1; j++) {
             if (nums[j] > numsi) {
                 // 红黑树查找大于左边最小值(numsi)得元素
                 Integer numsk = numskMap.ceilingKey(numsi + 1);

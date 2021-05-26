@@ -33,7 +33,8 @@ public class _739_daily_temperatures {
             int x = T[i];
             // 单调递减栈
             while (!stack.isEmpty() && x > T[stack.peek()]) {
-                int prevIndex = stack.peek();
+                // bug 修复：拿到栈顶元素，并弹出
+                int prevIndex = stack.pop();
                 res[prevIndex] = i - prevIndex;
             }
             stack.push(i);
