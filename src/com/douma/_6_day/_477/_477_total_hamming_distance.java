@@ -31,7 +31,7 @@ public class _477_total_hamming_distance {
         }
         return res;
     }
-    // 时间复杂度：O(n^2)
+    // 时间复杂度：O(n^2) ：超时
     public int totalHammingDistance1(int[] nums) {
         int res = 0;
         for (int i = 0; i < nums.length; i++) {

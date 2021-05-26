@@ -23,7 +23,7 @@ public class _57_insert_interval {
         // 2. 将区间开始小于等于新区间结束的区间和新区间合并
         while (i < intervals.length && intervals[i][0] <= newInterval[1]) {
             newInterval[0] = Math.min(intervals[i][0], newInterval[0]);
-            newInterval[1] = Math.max(intervals[i][1], newInterval[0]);
+            newInterval[1] = Math.max(intervals[i][1], newInterval[1]); // bug 修复：这是是结束值
             i++;
         }
         // 3. 将合并后的区间加入道结果集

@@ -34,7 +34,8 @@ public class _1365_how_many_numbers_are_smaller_than_the_current_number {
         int[][] data = new int[n][2];
         for (int i = 0; i < n; i++) {
             data[i][0] = nums[i];
-            data[i][0] = i;
+            // bug 修复：第二个值存储索引
+            data[i][1] = i;
         }
 
         // 按照元素值排序

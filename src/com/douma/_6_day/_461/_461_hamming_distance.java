@@ -15,7 +15,8 @@ public class _461_hamming_distance {
         // 计算 diff 中位 1 个数
         int res = 0;
         while (diff != 0) {
-            diff = diff ^ (diff - 1);
+            // bug 修复：这里是 &，去掉最后一个 1
+            diff = diff & (diff - 1);
             res++;
         }
 
