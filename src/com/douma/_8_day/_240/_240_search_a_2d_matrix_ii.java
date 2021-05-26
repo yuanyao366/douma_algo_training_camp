@@ -11,7 +11,7 @@ public class _240_search_a_2d_matrix_ii {
     // 暴力解法
     // 时间复杂度 O(mn)
     // 空间复杂度 O(1)
-    public boolean findNumberIn2DArray1(int[][] matrix, int target) {
+    public boolean searchMatrix1(int[][] matrix, int target) {
         int m = matrix.length;
         if (m == 0) return false;
         int n = matrix[0].length;
@@ -28,7 +28,7 @@ public class _240_search_a_2d_matrix_ii {
     }
 
     // 二分查找
-    public boolean findNumberIn2DArray2(int[][] matrix, int target) {
+    public boolean searchMatrix2(int[][] matrix, int target) {
         int m = matrix.length;
         if (m == 0) return false;
         int n = matrix[0].length;
@@ -84,7 +84,7 @@ public class _240_search_a_2d_matrix_ii {
     }
 
     // 缩减搜索空间
-    public boolean findNumberIn2DArray(int[][] matrix,
+    public boolean searchMatrix(int[][] matrix,
                                        int target) {
         int m = matrix.length;
         if (m == 0) return false;

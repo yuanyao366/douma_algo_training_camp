@@ -33,7 +33,8 @@ public class _1539_kth_missing_positive_number {
         int i = 0;
         while (missCnt < k) {
             if (currNum == arr[i]) {
-                if (i < arr.length) i++;
+                // bug 修复：注意 i 的边界
+                i = (i + 1 < arr.length) ? i + 1 : i;
             } else {
                 missCnt++;
                 lastMissNum = currNum;
