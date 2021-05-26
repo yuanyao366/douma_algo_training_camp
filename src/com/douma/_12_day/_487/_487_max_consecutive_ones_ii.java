@@ -1,4 +1,4 @@
-package com.douma._12_day.practice._487;
+package com.douma._12_day._487;
 
 /**
  * @官方网站 : https://douma.ke.qq.com
@@ -31,15 +31,18 @@ public class _487_max_consecutive_ones_ii {
         while (right < nums.length) {
             if (nums[right] == 0) {
                 windowZeroCnt++;
+                if (windowZeroCnt == 2) {
+                    ans = Math.max(ans, right - left);
+                }
             }
             while (windowZeroCnt == 2) {
                 if (nums[left] == 0) windowZeroCnt--;
                 left++;
             }
-            ans = Math.max(ans, right - left + 1);
+
             right++;
         }
-        return ans;
+        return Math.max(ans, right - left);
     }
 
     public int findMaxConsecutiveOnes(int[] nums) {

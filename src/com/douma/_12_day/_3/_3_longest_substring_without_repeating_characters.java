@@ -1,4 +1,4 @@
-package com.douma._12_day.practice._3;
+package com.douma._12_day._3;
 
 import java.util.*;
 
@@ -34,7 +34,7 @@ public class _3_longest_substring_without_repeating_characters {
     输出: 0
      
     提示：
-    0 <= s.length <= 5 * 104
+    0 <= s.length <= 5 * 10^4
     s 由英文字母、数字、符号和空格组成
 
      */
@@ -119,6 +119,9 @@ public class _3_longest_substring_without_repeating_characters {
                 right++;
             } else { // 存在的话，就不断的缩小窗口
                 int currCharRepeatIndex = window.get(currChar);
+                // "abba"  -> 假设当前字符是第二个 a
+                // 这个时候 left 已经指向了第二个 b 了
+                // 当前字符在前面出现的索引为 0，小于 left，所欲需要取两者的最大值
                 left = Math.max(left, currCharRepeatIndex + 1);
                 window.remove(currChar);
             }
@@ -128,26 +131,20 @@ public class _3_longest_substring_without_repeating_characters {
     }
 
     // 4. 追求程序的极致性能
-    // s 由英文字母、数字、符号和空格组成
     public int lengthOfLongestSubstring4(String s) {
         int n = s.length();
         if (n <= 1) return n;
         int maxLen = 1;
 
         int left = 0, right = 0;
-        int[] window = new int[128];
-        Arrays.fill(window, -1);
+        Map<Character, Integer> window = new HashMap<>();
         while (right < n) {
             char currChar = s.charAt(right);
-            if (window[currChar] == -1) { // 不存在的话，就不断扩大窗口
-                maxLen = Math.max(maxLen, right - left + 1);
-                window[currChar] = right;
-                right++;
-            } else { // 存在的话，就不断的缩小窗口
-                int currCharRepeatIndex = window[currChar];
-                left = Math.max(left, currCharRepeatIndex + 1);
-                window[currChar] = -1;
-            }
+            int rightCharIndex = window.getOrDefault(currChar, -1);
+            left = Math.max(left, rightCharIndex);
+            maxLen = Math.max(maxLen, right - left + 1);
+            window.put(currChar, right + 1);
+            right++;
         }
 
         return maxLen;
@@ -160,15 +157,15 @@ public class _3_longest_substring_without_repeating_characters {
 
         int maxLen = 1;
         int[] charIndex = new int[128];
-        int i = 0, j = 0;
-        while (j < s.length()) {
-            char rightChar = s.charAt(j);
+        int left = 0, right = 0;
+        while (right < s.length()) {
+            char rightChar = s.charAt(right);
             int rightCharIndex = charIndex[rightChar];
-            i = Math.max(i, rightCharIndex);
+            left = Math.max(left, rightCharIndex);
 
-            maxLen = Math.max(maxLen, j - i + 1);
-            charIndex[rightChar] = j + 1;
-            j++;
+            maxLen = Math.max(maxLen, right - left + 1);
+            charIndex[rightChar] = right + 1;
+            right++;
         }
         return maxLen;
     }

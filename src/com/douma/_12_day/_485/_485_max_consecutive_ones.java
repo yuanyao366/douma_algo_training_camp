@@ -1,4 +1,4 @@
-package com.douma._12_day.practice._485;
+package com.douma._12_day._485;
 
 /**
  * @官方网站 : https://douma.ke.qq.com

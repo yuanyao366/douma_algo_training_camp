@@ -1,4 +1,4 @@
-package com.douma._12_day.practice._30;
+package com.douma._12_day._30;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +35,7 @@ public class _30_substring_with_concatenation_of_all_words {
     输出：[6,9,12]
 
     提示：
-    1 <= s.length <= 104
+    1 <= s.length <= 10^4
     s 由小写英文字母组成
     1 <= words.length <= 5000
     1 <= words[i].length <= 30
@@ -43,8 +43,9 @@ public class _30_substring_with_concatenation_of_all_words {
 
      */
 
+    // 暴力解法
     public List<Integer> findSubstring1(String s, String[] words) {
-        // 统计每个单词出现的次数
+        // 1. 统计每个单词出现的次数
         Map<String, Integer> map = new HashMap<>();
         for (String word : words) {
             map.put(word, map.getOrDefault(word, 0) + 1);
@@ -55,24 +56,26 @@ public class _30_substring_with_concatenation_of_all_words {
         int totalLen = oneWordLen * wordNum;
 
         List<Integer> res = new ArrayList<>();
+        // 2. 遍历 s 中所有长度等于 totalLen 的子串
         for (int i = 0; i < s.length() - totalLen + 1; i++) {
-            // 拿到等于所有单词长度之和的子串
+            // 2.1 拿到等于所有单词长度之和的子串
             String subStr = s.substring(i, i + totalLen);
-            // 统计子串中单词出现的次数
+            // 2.2 统计每个子串中长度为 oneWordLen 所有单词出现的次数
             Map<String, Integer> tmpMap = new HashMap<>();
             for (int j = 0; j < totalLen; j += oneWordLen) {
                 String oneWord = subStr.substring(j, j + oneWordLen);
                 tmpMap.put(oneWord, tmpMap.getOrDefault(oneWord, 0) + 1);
             }
-            // 如果单词出现的次数和原始 words 中单词出现的次数相同，则符合条件
+            // 2.3 如果单词出现的次数和原始 words 中单词出现的次数相同，则符合条件
             if (map.equals(tmpMap)) res.add(i);
         }
 
         return res;
     }
 
+    // 滑动窗口
     public List<Integer> findSubstring(String s, String[] words) {
-        // 统计每个单词出现的次数
+        // 1. 统计每个单词出现的次数
         Map<String, Integer> map = new HashMap<>();
         for (String word : words) {
             map.put(word, map.getOrDefault(word, 0) + 1);
@@ -81,23 +84,23 @@ public class _30_substring_with_concatenation_of_all_words {
         int oneWordLen = words[0].length();
         int wordNum = words.length;
 
-
         List<Integer> res = new ArrayList<>();
+
         for (int i = 0; i < oneWordLen; i++) {
             int left = i, right = i;
-            int count = 0;
+            int matchedWordCnt = 0;
             Map<String, Integer> windowMap = new HashMap<>();
             while (right + oneWordLen <= s.length()) {
                 String currWord = s.substring(right, right + oneWordLen);
                 windowMap.put(currWord, windowMap.getOrDefault(currWord, 0) + 1);
-                count++;
+                matchedWordCnt++;
                 while (windowMap.getOrDefault(currWord, 0) > map.getOrDefault(currWord, 0)) {
                     String leftWord = s.substring(left, left + oneWordLen);
                     windowMap.put(leftWord, windowMap.getOrDefault(leftWord, 0) - 1);
                     left += oneWordLen;
-                    count--;
+                    matchedWordCnt--;
                 }
-                if (count == wordNum) res.add(left);
+                if (matchedWordCnt == wordNum) res.add(left);
                 right += oneWordLen;
             }
         }

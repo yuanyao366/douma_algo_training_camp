@@ -1,4 +1,4 @@
-package com.douma._12_day.practice._567;
+package com.douma._12_day._567;
 
 import java.util.Arrays;
 
@@ -31,22 +31,22 @@ public class _567_permutation_in_string {
      */
 
     public boolean checkInclusion2(String s1, String s2) {
-        int n = s1.length(), m = s2.length();
-        if (n > m) {
+        int m = s1.length(), n = s2.length();
+        if (m > n) {
             return false;
         }
         int[] cnt1 = new int[26];
         int[] cnt2 = new int[26];
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < m; ++i) {
             ++cnt1[s1.charAt(i) - 'a'];
             ++cnt2[s2.charAt(i) - 'a'];
         }
         if (Arrays.equals(cnt1, cnt2)) {
             return true;
         }
-        for (int i = n; i < m; ++i) {
+        for (int i = m; i < n; ++i) {
             ++cnt2[s2.charAt(i) - 'a'];
-            --cnt2[s2.charAt(i - n) - 'a'];
+            --cnt2[s2.charAt(i - m) - 'a'];
             if (Arrays.equals(cnt1, cnt2)) {
                 return true;
             }
@@ -62,16 +62,16 @@ public class _567_permutation_in_string {
         // 先统计字符串 s1 中每个字符出现的次数
         int[] cnt = new int[26];
         for (int i = 0; i < n; ++i) {
-            --cnt[s1.charAt(i) - 'a'];
+            ++cnt[s1.charAt(i) - 'a'];
         }
 
         int left = 0, right = 0;
         while (right < m) {
             int x = s2.charAt(right) - 'a';
-            cnt[x]++;
-            while (cnt[x] > 0) {
+            cnt[x]--;
+            while (cnt[x] < 0) {
                 // 通过缩减窗口是的 cnt[x] 不为正数
-                cnt[s2.charAt(left) - 'a']--;
+                cnt[s2.charAt(left) - 'a']++;
                 left++;
             }
             // 到现在为止，当前窗口中字符的 cnt 值都不为正数

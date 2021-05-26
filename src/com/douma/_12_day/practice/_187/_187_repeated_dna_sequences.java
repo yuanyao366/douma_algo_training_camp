@@ -50,7 +50,7 @@ public class _187_repeated_dna_sequences {
         return new ArrayList<>(output);
     }
 
-    // 参考字符串匹配 RK 算法，使用滚动哈希方法
+    // 参考【课程 A 中应用篇】的字符串匹配 RK 算法，使用滚动哈希方法
     // 时间复杂度：O(n)
     public List<String> findRepeatedDnaSequences2(String s) {
         int n = s.length();
@@ -78,8 +78,10 @@ public class _187_repeated_dna_sequences {
 
         int left = 1, right = k; // 从第二个窗口开始
         while (right < n) {
-            currWindowHash = currWindowHash - toInt.get(s.charAt(left - 1)) * shiftLeft;      // Remove s.charAt(left - 1).
-            currWindowHash = currWindowHash * base + toInt.get(s.charAt(right));              // Add s.charAt(right).
+            // 删除 s.charAt(left - 1)
+            currWindowHash = currWindowHash - toInt.get(s.charAt(left - 1)) * shiftLeft;
+            // 添加 s.charAt(right)
+            currWindowHash = currWindowHash * base + toInt.get(s.charAt(right));
             if (seen.contains(currWindowHash)) output.add(s.substring(left, right + 1));
             else seen.add(currWindowHash);
 

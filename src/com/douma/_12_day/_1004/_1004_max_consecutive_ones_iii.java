@@ -1,4 +1,4 @@
-package com.douma._12_day.practice._1004;
+package com.douma._12_day._1004;
 
 /**
  * @官方网站 : https://douma.ke.qq.com
@@ -62,13 +62,16 @@ public class _1004_max_consecutive_ones_iii {
             if (nums[right] == 0) {
                 zeroCnt++;
             }
+            if (zeroCnt == k) {
+                ans = Math.max(ans, right - left + 1);
+            }
             while (zeroCnt > k) {
                 if (nums[left] == 0) zeroCnt--;
                 left++;
             }
-            ans = Math.max(ans, right - left + 1);
+
             right++;
         }
-        return ans;
+        return Math.max(ans, right - left);
     }
 }

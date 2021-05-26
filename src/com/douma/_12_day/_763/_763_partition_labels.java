@@ -1,4 +1,4 @@
-package com.douma._12_day.practice._763;
+package com.douma._12_day._763;
 
 import java.util.ArrayList;
 import java.util.List;

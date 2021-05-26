@@ -1,4 +1,4 @@
-package com.douma._12_day.practice._76;
+package com.douma._12_day._76;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class _76_minimum_window_substring {
     输出："a"
 
     提示：
-    1 <= s.length, t.length <= 105
+    1 <= s.length, t.length <= 10^5
     s 和 t 由英文字母组成
      
     进阶：你能设计一个在 o(n) 时间内解决此问题的算法吗？
@@ -36,16 +36,19 @@ public class _76_minimum_window_substring {
     public String minWindow1(String s, String t) {
         // 统计字符串 t 中每个字符出现的次数
         int[] cntT = new int[60];
-        int uniqueCharCnt = 0;
+        // 统计 t 中不同的字符数
+        int uniqueCharsInT = 0;
         for (char c : t.toCharArray()) {
-            if (cntT[c - 'A'] == 0) uniqueCharCnt++;
+            if (cntT[c - 'A'] == 0) uniqueCharsInT++;
             cntT[c - 'A']++;
         }
 
 
         int left = 0, right = 0;
+        // 窗口中每个字符出现的次数
         int[] windowCntS = new int[60];
-        int formed = 0; // 记录已经匹配字符的个数
+        // 记录当前窗口中字符出现的次数和 t 中字符出现次数相等的字符数
+        int matchedChars = 0;
         int[] ans = {-1, 0, 0};
         while (right < s.length()) {
             char currChar = s.charAt(right);
@@ -53,10 +56,10 @@ public class _76_minimum_window_substring {
             windowCntS[currCharIndex]++;
 
             if (windowCntS[currCharIndex] == cntT[currCharIndex]) {
-                formed++;
+                matchedChars++;
             }
 
-            while (left <= right && formed == uniqueCharCnt) {
+            while (left <= right && matchedChars == uniqueCharsInT) {
                 // 尝试缩减窗口，因为我们想找到最短符合条件的子串
                 if (ans[0] == -1 || right - left + 1 < ans[0]) {
                     ans[0] = right - left + 1;
@@ -67,7 +70,7 @@ public class _76_minimum_window_substring {
                 char leftChar = s.charAt(left);
                 int leftCharIndex = leftChar - 'A';
                 windowCntS[leftCharIndex]--;
-                if (windowCntS[leftCharIndex] < cntT[leftCharIndex]) formed--;
+                if (windowCntS[leftCharIndex] < cntT[leftCharIndex]) matchedChars--;
 
                 left++;
             }
@@ -116,7 +119,7 @@ public class _76_minimum_window_substring {
 
         int left = 0, right = 0;
         int[] windowCntS = new int[60];
-        int formed = 0; // 记录已经匹配字符的个数
+        int matchedChars = 0; // 记录已经匹配字符的个数
         int[] ans = {-1, 0, 0};
         while (right < filteredS.size()) {
             char currChar = filteredS.get(right).getValue();
@@ -124,10 +127,10 @@ public class _76_minimum_window_substring {
             windowCntS[currCharIndex]++;
 
             if (windowCntS[currCharIndex] == cntT[currCharIndex]) {
-                formed++;
+                matchedChars++;
             }
 
-            while (left <= right && formed == uniqueCharCnt) {
+            while (left <= right && matchedChars == uniqueCharCnt) {
                 // 尝试缩减窗口，因为我们想找到最短符合条件的子串
                 int end = filteredS.get(right).getKey();
                 int start = filteredS.get(left).getKey();
@@ -140,7 +143,7 @@ public class _76_minimum_window_substring {
                 char leftChar = filteredS.get(left).getValue();
                 int leftCharIndex = leftChar - 'A';
                 windowCntS[leftCharIndex]--;
-                if (windowCntS[leftCharIndex] < cntT[leftCharIndex]) formed--;
+                if (windowCntS[leftCharIndex] < cntT[leftCharIndex]) matchedChars--;
 
                 left++;
             }
