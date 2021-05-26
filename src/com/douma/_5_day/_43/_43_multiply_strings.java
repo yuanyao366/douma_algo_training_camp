@@ -36,43 +36,46 @@ public class _43_multiply_strings {
         if (num1.equals("0") || num2.equals("0")) return "0";
 
         String ans = "0";
-        int m = num1.length(), n = num2.length();
+        int m = num1.length();
+        int n = num2.length();
+
+        // 处理被乘数的每一位
         for (int i = n - 1; i >= 0; i--) {
             StringBuilder currAns = new StringBuilder();
             // 对当前位的后面补 0
-            for (int j = n - 1; j > i ; j--) {
-                currAns.append("0");
-            }
-            int y = num2.charAt(i) - '0';
+            for (int j = n - 1; j > i; j--) currAns.append("0");
+
+            int y = num2.charAt(i) - '0'; // 当前位的值
             int carry = 0;
             for (int j = m - 1; j >= 0; j--) {
+                // 将当前位的值和乘数的每一位进行相乘
                 int x = num1.charAt(j) - '0';
                 int product = x * y + carry;
                 currAns.append(product % 10);
                 carry = product / 10;
             }
             if (carry != 0) currAns.append(carry);
-            // 字符串相加
-            addStrings(ans, currAns.reverse().toString());
+            // 将被乘数每一位和乘数相乘的结果累加
+            ans = addStrings(ans, currAns.reverse().toString());
         }
         return ans;
     }
 
     public String addStrings(String num1, String num2) {
         StringBuilder res = new StringBuilder();
+
+        int i1 = num1.length() - 1, i2 = num2.length() - 1;
         int carry = 0;
-        int l1 = num1.length() - 1;
-        int l2 = num2.length() - 1;
-        while (l1 >= 0 || l2 >= 0) {
-            int x = l1 < 0 ? 0 : num1.charAt(l1) - '0';
-            int y = l2 < 0 ? 0 : num2.charAt(l2) - '0';
+        while (i1 >= 0 || i2 >= 0) {
+            int x = i1 >= 0 ? num1.charAt(i1) - '0' : 0;
+            int y = i2 >= 0 ? num2.charAt(i2) - '0' : 0;
 
             int sum = x + y + carry;
             res.append(sum % 10);
             carry = sum / 10;
 
-            l1--;
-            l2--;
+            i1--;
+            i2--;
         }
         if (carry != 0) res.append(carry);
         return res.reverse().toString();

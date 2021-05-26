@@ -30,6 +30,7 @@ public class _2_add_two_numbers {
 
             int sum = x + y + carry;
             curr.next = new ListNode(sum % 10);
+            // bug 修复：视频中忘了加上这一步
             curr = curr.next;
             carry = sum / 10;
 
