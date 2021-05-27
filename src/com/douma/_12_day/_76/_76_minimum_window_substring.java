@@ -3,15 +3,8 @@ package com.douma._12_day._76;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @官方网站 : https://douma.ke.qq.com
- * @微信公众号 : 抖码课堂
- * @官方微信号 : bigdatatang01
- * 抖码算法，让算法学习变的简单有趣
- * @作者 : 老汤
- */
 public class _76_minimum_window_substring {
-    /* leetcode 76. 最小覆盖子串
+    /* 76. 最小覆盖子串
     给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。
     如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
 
@@ -43,7 +36,6 @@ public class _76_minimum_window_substring {
             cntT[c - 'A']++;
         }
 
-
         int left = 0, right = 0;
         // 窗口中每个字符出现的次数
         int[] windowCntS = new int[60];
@@ -51,14 +43,13 @@ public class _76_minimum_window_substring {
         int matchedChars = 0;
         int[] ans = {-1, 0, 0};
         while (right < s.length()) {
-            char currChar = s.charAt(right);
-            int currCharIndex = currChar - 'A';
-            windowCntS[currCharIndex]++;
+            char rightChar = s.charAt(right);
+            int rightCharIndex = rightChar - 'A';
+            windowCntS[rightCharIndex]++;
 
-            if (windowCntS[currCharIndex] == cntT[currCharIndex]) {
+            if (windowCntS[rightCharIndex] == cntT[rightCharIndex]) {
                 matchedChars++;
             }
-
             while (left <= right && matchedChars == uniqueCharsInT) {
                 // 尝试缩减窗口，因为我们想找到最短符合条件的子串
                 if (ans[0] == -1 || right - left + 1 < ans[0]) {
@@ -70,14 +61,70 @@ public class _76_minimum_window_substring {
                 char leftChar = s.charAt(left);
                 int leftCharIndex = leftChar - 'A';
                 windowCntS[leftCharIndex]--;
-                if (windowCntS[leftCharIndex] < cntT[leftCharIndex]) matchedChars--;
-
+                if (windowCntS[leftCharIndex] < cntT[leftCharIndex]) {
+                    matchedChars--;
+                }
                 left++;
             }
-
             right++;
         }
+        return ans[0] == -1 ? "" : s.substring(ans[1], ans[2] + 1);
+    }
 
+    public String minWindow2(String s, String t) {
+        // 统计字符串 t 中每个字符出现的次数
+        int[] cntT = new int[60];
+        // 统计 t 中不同的字符数
+        int uniqueCharsInT = 0;
+        for (char c : t.toCharArray()) {
+            if (cntT[c - 'A'] == 0) uniqueCharsInT++;
+            cntT[c - 'A']++;
+        }
+
+        // 在 s 中拿到是 t 中的字符，及其在 s 中的位置
+        List<Pair<Integer, Character>> filteredS =
+                new ArrayList<Pair<Integer, Character>>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (cntT[c - 'A'] > 0) {
+                filteredS.add(new Pair<>(i, c));
+            }
+        }
+
+        int left = 0, right = 0;
+        // 窗口中每个字符出现的次数
+        int[] windowCntS = new int[60];
+        // 记录当前窗口中字符出现的次数和 t 中字符出现次数相等的字符数
+        int matchedChars = 0;
+        int[] ans = {-1, 0, 0};
+        while (right < filteredS.size()) {
+            char rightChar = filteredS.get(right).getValue();
+            int rightCharIndex = rightChar - 'A';
+            windowCntS[rightCharIndex]++;
+
+            if (windowCntS[rightCharIndex] == cntT[rightCharIndex]) {
+                matchedChars++;
+            }
+            while (left <= right && matchedChars == uniqueCharsInT) {
+                // 尝试缩减窗口，因为我们想找到最短符合条件的子串
+                int end = filteredS.get(right).getKey();
+                int start = filteredS.get(left).getKey();
+                if (ans[0] == -1 || end - start + 1 < ans[0]) {
+                    ans[0] = end - start + 1;
+                    ans[1] = start;
+                    ans[2] = end;
+                }
+
+                char leftChar = filteredS.get(left).getValue();
+                int leftCharIndex = leftChar - 'A';
+                windowCntS[leftCharIndex]--;
+                if (windowCntS[leftCharIndex] < cntT[leftCharIndex]) {
+                    matchedChars--;
+                }
+                left++;
+            }
+            right++;
+        }
         return ans[0] == -1 ? "" : s.substring(ans[1], ans[2] + 1);
     }
 
@@ -99,58 +146,4 @@ public class _76_minimum_window_substring {
         }
     }
 
-    public String minWindow(String s, String t) {
-        // 统计字符串 t 中每个字符出现的次数
-        int[] cntT = new int[60];
-        int uniqueCharCnt = 0;
-        for (char c : t.toCharArray()) {
-            if (cntT[c - 'A'] == 0) uniqueCharCnt++;
-            cntT[c - 'A']++;
-        }
-
-        // 在 s 中拿到是 t 中的字符，及其在 s 中的位置
-        List<Pair<Integer, Character>> filteredS = new ArrayList<Pair<Integer, Character>>();
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (cntT[c - 'A'] > 0) {
-                filteredS.add(new Pair<>(i, c));
-            }
-        }
-
-        int left = 0, right = 0;
-        int[] windowCntS = new int[60];
-        int matchedChars = 0; // 记录已经匹配字符的个数
-        int[] ans = {-1, 0, 0};
-        while (right < filteredS.size()) {
-            char currChar = filteredS.get(right).getValue();
-            int currCharIndex = currChar - 'A';
-            windowCntS[currCharIndex]++;
-
-            if (windowCntS[currCharIndex] == cntT[currCharIndex]) {
-                matchedChars++;
-            }
-
-            while (left <= right && matchedChars == uniqueCharCnt) {
-                // 尝试缩减窗口，因为我们想找到最短符合条件的子串
-                int end = filteredS.get(right).getKey();
-                int start = filteredS.get(left).getKey();
-                if (ans[0] == -1 || end - start + 1 < ans[0]) {
-                    ans[0] = end - start + 1;
-                    ans[1] = start;
-                    ans[2] = end;
-                }
-
-                char leftChar = filteredS.get(left).getValue();
-                int leftCharIndex = leftChar - 'A';
-                windowCntS[leftCharIndex]--;
-                if (windowCntS[leftCharIndex] < cntT[leftCharIndex]) matchedChars--;
-
-                left++;
-            }
-
-            right++;
-        }
-
-        return ans[0] == -1 ? "" : s.substring(ans[1], ans[2] + 1);
-    }
 }

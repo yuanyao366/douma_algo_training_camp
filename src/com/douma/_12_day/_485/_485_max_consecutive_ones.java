@@ -1,12 +1,5 @@
 package com.douma._12_day._485;
 
-/**
- * @官方网站 : https://douma.ke.qq.com
- * @微信公众号 : 抖码课堂
- * @官方微信号 : bigdatatang01
- * 抖码算法，让算法学习变的简单有趣
- * @作者 : 老汤
- */
 public class _485_max_consecutive_ones {
     /* leetcode 485. 最大连续 1 的个数
     给定一个二进制数组， 计算其中最大连续 1 的个数。
@@ -23,6 +16,34 @@ public class _485_max_consecutive_ones {
      */
     public int findMaxConsecutiveOnes1(int[] nums) {
         int ans = 0;
+        int ones = 0;
+        for (int num : nums) {
+            if (num == 1) {
+                ones++;
+            } else {
+                ans = Math.max(ans, ones);
+                ones = 0;
+            }
+        }
+        return Math.max(ans, ones);
+    }
+
+    public int findMaxConsecutiveOnes2(int[] nums) {
+        int ans = 0;
+        int left = 0, right = 0;
+        while (right < nums.length) {
+            if (nums[right] == 0) {
+                // 如果 0 少的话，可以这样做
+                ans = Math.max(ans, right - left);
+                left = right + 1;
+            }
+            right++;
+        }
+        return Math.max(ans, right - left);
+    }
+
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int ans = 0;
         int left = 0, right = 0;
         while (right < nums.length) {
             if (nums[right] == 1) {
@@ -36,17 +57,4 @@ public class _485_max_consecutive_ones {
         return ans;
     }
 
-    public int findMaxConsecutiveOnes(int[] nums) {
-        int ans = 0;
-        int left = 0, right = 0;
-        while (right < nums.length) {
-            if (nums[right] == 0) {
-                // 如果 1 少的话，要这样做
-                ans = Math.max(ans, right - left);
-                left = right + 1;
-            }
-            right++;
-        }
-        return Math.max(ans, right - left);
-    }
 }

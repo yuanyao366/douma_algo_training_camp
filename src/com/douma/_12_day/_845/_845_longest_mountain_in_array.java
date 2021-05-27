@@ -1,12 +1,5 @@
 package com.douma._12_day._845;
 
-/**
- * @官方网站 : https://douma.ke.qq.com
- * @微信公众号 : 抖码课堂
- * @官方微信号 : bigdatatang01
- * 抖码算法，让算法学习变的简单有趣
- * @作者 : 老汤
- */
 public class _845_longest_mountain_in_array {
     /* leetcode 845. 数组中的最长山脉
     我们把数组 A 中符合下列属性的任意连续子数组 B 称为 “山脉”：
@@ -42,19 +35,18 @@ public class _845_longest_mountain_in_array {
         int left = 0;
         while (left + 2 < n) {
             int right = left + 1;
-            if (arr[left] < arr[left + 1]) {
+            if (arr[left] < arr[right]) {
                 // 找到最高点
                 while (right + 1 < n && arr[right] < arr[right + 1]) {
                     right++;
                 }
-
-                if (right + 1 < n && arr[right] > arr[right + 1]) { // 有更低的点
+                if (right + 1 < n && arr[right] > arr[right + 1]) {
                     // 找到最低点
                     while (right + 1 < n && arr[right] > arr[right + 1]) {
                         right++;
                     }
                     ans = Math.max(ans, right - left + 1);
-                } else { // 没有更低的点了
+                } else {
                     right++;
                 }
             }

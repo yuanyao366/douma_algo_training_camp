@@ -1,12 +1,5 @@
 package com.douma._12_day._1151;
 
-/**
- * @官方网站 : https://douma.ke.qq.com
- * @微信公众号 : 抖码课堂
- * @官方微信号 : bigdatatang01
- * 抖码算法，让算法学习变的简单有趣
- * @作者 : 老汤
- */
 public class _1151_minimum_swaps_to_group_all_1s_together {
     /* leetcode 1151. 最少交换次数来组合所有的 1
     给出一个二进制数组 data，你需要通过交换位置，
@@ -49,11 +42,10 @@ public class _1151_minimum_swaps_to_group_all_1s_together {
 
         // 维护窗口大小为 k 的滑动窗口
         int left = 0, right = 0;
-
-        // 所有窗口中最少的 0 的数量
-        int minZeroCnt = Integer.MAX_VALUE;
         // 存储每个窗口中 0 的数量
         int windowZeroCnt = 0;
+        // 所有窗口中最少的 0 的数量
+        int minZeroCnt = Integer.MAX_VALUE;
         while (right < data.length) {
             if (data[right] == 0) windowZeroCnt++;
             if (right - left + 1 == k) {
@@ -65,4 +57,5 @@ public class _1151_minimum_swaps_to_group_all_1s_together {
         }
         return minZeroCnt == Integer.MAX_VALUE ? 0 : minZeroCnt;
     }
+
 }

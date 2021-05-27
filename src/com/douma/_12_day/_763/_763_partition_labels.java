@@ -3,16 +3,10 @@ package com.douma._12_day._763;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @官方网站 : https://douma.ke.qq.com
- * @微信公众号 : 抖码课堂
- * @官方微信号 : bigdatatang01
- * 抖码算法，让算法学习变的简单有趣
- * @作者 : 老汤
- */
 public class _763_partition_labels {
     /* leetcode 763. 划分字母区间
-   字符串 S 由小写字母组成。我们要把这个字符串划分为尽可能多的片段，同一字母最多出现在一个片段中。
+   字符串 S 由小写字母组成。
+   我们要把这个字符串划分为尽可能多的片段，同一字母最多出现在一个片段中。
    返回一个表示每个字符串片段的长度的列表。
 
     示例：
@@ -43,18 +37,14 @@ public class _763_partition_labels {
         int left = 0;
         int right = 0;
         for (int i = 0; i < S.length(); i++) {
-            // 计算窗口的右指针
-            right = Math.max(right, c2Index[S.charAt(i) - 'a']);
+            char c = S.charAt(i);
+            right = Math.max(right, c2Index[c - 'a']);
 
-            // left 指针移动到右指针的下一位
-            // 移动时机：当再一次遇到右指针索引位置
-            // 移动策略：计算一个片段的长度
             if (i == right) {
                 res.add(right - left + 1);
                 left = right + 1;
             }
         }
-
         return res;
     }
 }

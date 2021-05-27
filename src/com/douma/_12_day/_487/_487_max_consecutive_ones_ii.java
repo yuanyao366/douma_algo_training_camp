@@ -1,14 +1,7 @@
 package com.douma._12_day._487;
 
-/**
- * @官方网站 : https://douma.ke.qq.com
- * @微信公众号 : 抖码课堂
- * @官方微信号 : bigdatatang01
- * 抖码算法，让算法学习变的简单有趣
- * @作者 : 老汤
- */
 public class _487_max_consecutive_ones_ii {
-    /* leetcode 487. 最大连续1的个数 II
+    /* leetcode 487. 最大连续 1 的个数 II
     给定一个二进制数组，你可以最多将 1 个 0 翻转为 1，找出其中最大连续 1 的个数。
 
     示例 1：
@@ -22,7 +15,8 @@ public class _487_max_consecutive_ones_ii {
     输入数组的长度为正整数，且不超过 10,000
      
     进阶：
-    如果输入的数字是作为 无限流 逐个输入如何处理？换句话说，内存不能存储下所有从流中输入的数字。您可以有效地解决吗？
+    如果输入的数字是作为 无限流 逐个输入如何处理？
+    换句话说，内存不能存储下所有从流中输入的数字。您可以有效地解决吗？
      */
     public int findMaxConsecutiveOnes1(int[] nums) {
         int ans = 0;
@@ -45,19 +39,18 @@ public class _487_max_consecutive_ones_ii {
         return Math.max(ans, right - left);
     }
 
-    public int findMaxConsecutiveOnes(int[] nums) {
+    public int findMaxConsecutiveOnes2(int[] nums) {
         int ans = 0;
         int left = 0, right = 0;
         int zeroIndex = -1; // 记录当前窗口中 0 出现的位置
         while (right < nums.length) {
             if (nums[right] == 0) {
-                if (zeroIndex >= 0) { // 只出现一个 0
+                if (zeroIndex >= 0) { // 说明当前窗口已经有 0
                     ans = Math.max(ans, right - left);
                     left = zeroIndex + 1;
                 }
                 zeroIndex = right;
             }
-
             right++;
         }
         return Math.max(ans, right - left);

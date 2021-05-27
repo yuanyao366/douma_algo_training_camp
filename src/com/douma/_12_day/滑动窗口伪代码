@@ -1,0 +1,28 @@
+int left = 0, right = 0;
+int ans = 0;
+while (right < nums.length) {
+    处理 right 指向的元素，将其加入到当前窗口
+
+    while (窗口满足条件) {
+        // 计算结果
+        处理 left 指向的元素，将其从当前窗口中剔除掉
+        left++;
+    }
+    // 计算结果
+    right++;
+}
+
+
+int left = 0, right = 0;
+
+while (right < nums.length) {
+    处理 right 指向的元素，将其加入到当前窗口
+
+    while (窗口不满足条件) {
+        // 计算结果
+        处理 left 指向的元素，将其从当前窗口中剔除掉
+        left++;
+    }
+    // 计算结果
+    right++;
+}

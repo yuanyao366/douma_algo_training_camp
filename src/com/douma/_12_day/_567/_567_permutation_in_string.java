@@ -2,13 +2,6 @@ package com.douma._12_day._567;
 
 import java.util.Arrays;
 
-/**
- * @官方网站 : https://douma.ke.qq.com
- * @微信公众号 : 抖码课堂
- * @官方微信号 : bigdatatang01
- * 抖码算法，让算法学习变的简单有趣
- * @作者 : 老汤
- */
 public class _567_permutation_in_string {
     /* leetcode 567. 字符串的排列
     给定两个字符串 s1 和 s2，写一个函数来判断 s2 是否包含 s1 的排列。
@@ -30,23 +23,32 @@ public class _567_permutation_in_string {
 
      */
 
-    public boolean checkInclusion2(String s1, String s2) {
-        int m = s1.length(), n = s2.length();
-        if (m > n) {
+    public boolean checkInclusion1(String s1, String s2) {
+        /*
+        输入: s1 = "ab" s2 = "eidbaooo"
+        s1:
+            a->1
+            b->1
+        s2：
+            b->1
+            a->1
+         */
+        int n = s1.length(), m = s2.length();
+        if (n > m) {
             return false;
         }
         int[] cnt1 = new int[26];
         int[] cnt2 = new int[26];
-        for (int i = 0; i < m; ++i) {
+        for (int i = 0; i < n; i++) {
             ++cnt1[s1.charAt(i) - 'a'];
             ++cnt2[s2.charAt(i) - 'a'];
         }
         if (Arrays.equals(cnt1, cnt2)) {
             return true;
         }
-        for (int i = m; i < n; ++i) {
+        for (int i = n; i < m; i++) {
             ++cnt2[s2.charAt(i) - 'a'];
-            --cnt2[s2.charAt(i - m) - 'a'];
+            --cnt2[s2.charAt(i - n) - 'a'];
             if (Arrays.equals(cnt1, cnt2)) {
                 return true;
             }
@@ -54,11 +56,13 @@ public class _567_permutation_in_string {
         return false;
     }
 
+    // 滑动窗口
     public boolean checkInclusion(String s1, String s2) {
         int n = s1.length(), m = s2.length();
         if (n > m) {
             return false;
         }
+
         // 先统计字符串 s1 中每个字符出现的次数
         int[] cnt = new int[26];
         for (int i = 0; i < n; ++i) {
@@ -70,15 +74,17 @@ public class _567_permutation_in_string {
             int x = s2.charAt(right) - 'a';
             cnt[x]--;
             while (cnt[x] < 0) {
-                // 通过缩减窗口是的 cnt[x] 不为正数
+                // 通过缩减窗口使得 cnt[x] 不为负数
                 cnt[s2.charAt(left) - 'a']++;
                 left++;
             }
-            // 到现在为止，当前窗口中字符的 cnt 值都不为正数
+            // 到现在为止，当前窗口中字符的 cnt 值都为 0（不包含 s1 里面的字符）
             // 如果窗口的长度等于 n 的话，那么当前窗口中的 cnt 的值都是 0
             if (right - left + 1 == n) return true;
+            // bug 修复：right 需要往前走
             right++;
         }
         return false;
     }
+
 }
