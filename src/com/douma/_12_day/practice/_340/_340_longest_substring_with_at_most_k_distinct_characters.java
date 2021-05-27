@@ -30,22 +30,21 @@ public class _340_longest_substring_with_at_most_k_distinct_characters {
 
     public int lengthOfLongestSubstringKDistinct(String s, int k) {
         int ans = 0;
-        // 维护当前窗口中每个字符最后出现的索引
-        Map<Character, Integer> charIndex = new HashMap<>();
-        // 维护当前窗口中的
-        int minIndex = -1;
+
         int left = 0, right = 0;
+        // 维护当前窗口中每个字符出现的次数
+        Map<Character, Integer> windowCharCnt = new HashMap<>();
         while (right < s.length()) {
             char currChar = s.charAt(right);
-            charIndex.put(currChar, right);
+            windowCharCnt.put(currChar, windowCharCnt.getOrDefault(currChar, 0) + 1);
 
-            while (left <= right && charIndex.size() > k) {
-                // 拿到窗口中最小的索引
-                // 注意最小的索引值不一定等于 left 值，
-                // 比如字符串 eeeetf ，那么它的 left 值可能是 0，但是窗口的最小索引值可能是 3
-                int delIndex = Collections.min(charIndex.values());
-                charIndex.remove(s.charAt(delIndex));
-                left = delIndex + 1;
+            while (left <= right && windowCharCnt.size() > k) { // 这里改成 k 即可
+                char leftChar = s.charAt(left);
+                windowCharCnt.put(leftChar, windowCharCnt.getOrDefault(leftChar, 0) - 1);
+                if (windowCharCnt.get(leftChar) <= 0) {
+                    windowCharCnt.remove(leftChar);
+                }
+                left++;
             }
 
             ans = Math.max(ans, right - left + 1);

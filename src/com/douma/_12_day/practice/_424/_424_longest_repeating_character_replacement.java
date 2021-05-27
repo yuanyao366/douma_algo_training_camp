@@ -45,7 +45,7 @@ public class _424_longest_repeating_character_replacement {
             freq[charArray[right] - 'A']++;
             maxCount = Math.max(maxCount, freq[charArray[right] - 'A']);
             // 出现最多的次数，再加上 k 都没有当前窗口长度大，说明可以缩减窗口了
-            if (maxCount + k < right - left + 1) {
+            if ((right - left + 1) - maxCount > k) {
                 freq[charArray[left] - 'A']--;
                 left++;
             }

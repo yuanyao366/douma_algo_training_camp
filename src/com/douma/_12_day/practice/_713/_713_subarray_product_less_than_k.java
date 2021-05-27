@@ -28,14 +28,13 @@ public class _713_subarray_product_less_than_k {
     public int numSubarrayProductLessThanK(int[] nums, int k) {
         if (k <= 1) return 0;
 
-        // 存储乘积小于K的子数组的个数
+        // 维护滑动窗口
+        int left = 0, right = 0;
+        // 存储乘积小于 k 的子数组的个数
         int ans = 0;
         // 当前窗口的所有元素的乘积
         int prod = 1;
 
-        // 维护滑动窗口
-        int left = 0;
-        int right = 0;
         while (right < nums.length) {
             // 更新当前窗口的累计乘积
             prod *= nums[right];
@@ -44,8 +43,12 @@ public class _713_subarray_product_less_than_k {
             // 移动策略：将累计乘积除以需要移除的左边的元素值
             while(prod >= k) prod /= nums[left++];
 
-            // 到现在当前窗口的乘积小于 k
-            // 计算乘积小于 k 的子数组的个数
+            /*
+            [10,5,2,6]
+            第一个窗口 [10]      --> 符合条件的子数组：1
+            第二个窗口 [10, 5]   --> 符合条件的子数组：[10, 5] 和 [5] 即 2 个 = right - left + 1
+            ......
+             */
             ans += right - left + 1;
 
             // right 指针移动
@@ -53,5 +56,10 @@ public class _713_subarray_product_less_than_k {
         }
 
         return ans;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1,1,1};
+        new _713_subarray_product_less_than_k().numSubarrayProductLessThanK(nums, 1);
     }
 }

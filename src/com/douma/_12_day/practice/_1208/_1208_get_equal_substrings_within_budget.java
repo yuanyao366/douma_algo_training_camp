@@ -38,14 +38,12 @@ public class _1208_get_equal_substrings_within_budget {
      */
 
     public int equalSubstring(String s, String t, int maxCost) {
+        // 维护滑动窗口
+        int left = 0, right = 0;
         // 最大长度
         int ans = 0;
         // 当前窗口的预算
         int windowCost = 0;
-
-        // 维护滑动窗口
-        int left = 0;
-        int right = 0;
         while (right < s.length()) {
             // 更新当前窗口的预算
             char sc = s.charAt(right);

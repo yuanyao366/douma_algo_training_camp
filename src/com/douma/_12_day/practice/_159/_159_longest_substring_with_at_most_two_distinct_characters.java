@@ -27,19 +27,19 @@ public class _159_longest_substring_with_at_most_two_distinct_characters {
      */
     public int lengthOfLongestSubstringTwoDistinct1(String s) {
         int ans = 0;
-        // 维护当前窗口中每个字符出现的次数
-        Map<Character, Integer> count = new HashMap<>();
 
         int left = 0, right = 0;
+        // 维护当前窗口中每个字符出现的次数
+        Map<Character, Integer> windowCharCnt = new HashMap<>();
         while (right < s.length()) {
             char currChar = s.charAt(right);
-            count.put(currChar, count.getOrDefault(currChar, 0) + 1);
+            windowCharCnt.put(currChar, windowCharCnt.getOrDefault(currChar, 0) + 1);
 
-            while (left <= right && count.size() > 2) {
+            while (left <= right && windowCharCnt.size() > 2) {
                 char leftChar = s.charAt(left);
-                count.put(leftChar, count.getOrDefault(leftChar, 0) - 1);
-                if (count.get(leftChar) <= 0) {
-                    count.remove(leftChar);
+                windowCharCnt.put(leftChar, windowCharCnt.getOrDefault(leftChar, 0) - 1);
+                if (windowCharCnt.get(leftChar) <= 0) {
+                    windowCharCnt.remove(leftChar);
                 }
                 left++;
             }

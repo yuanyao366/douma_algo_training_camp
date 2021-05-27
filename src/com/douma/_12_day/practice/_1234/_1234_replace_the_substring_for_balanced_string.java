@@ -54,7 +54,7 @@ public class _1234_replace_the_substring_for_balanced_string {
         }
 
         int need = s.length() / 4;
-        int min = arr.length;
+        int ans = arr.length;
 
         // 滑动窗口
         int left = 0, right = 0;
@@ -74,14 +74,14 @@ public class _1234_replace_the_substring_for_balanced_string {
             // 缩小窗口，加上 count 中相应字符出现的次数
             // 这个时候 count 中的字符的个数都 小于等于 need
             // 开始移动 left，并且将 left 对应的字符的个数加一
-            min = Math.min(min, right - left);
-            if (min == 0) break;
+            ans = Math.min(ans, right - left);
+            if (ans == 0) break;
 
             char leftCh = arr[left];
             count[leftCh]++;
             left++;
         }
 
-        return min;
+        return ans;
     }
 }
