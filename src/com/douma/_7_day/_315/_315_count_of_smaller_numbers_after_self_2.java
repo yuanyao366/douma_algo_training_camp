@@ -82,8 +82,9 @@ public class _315_count_of_smaller_numbers_after_self_2 {
         }
         // 拷贝
         for (tmpPos = left; tmpPos <= right; tmpPos++) {
-            data[left++] = tmp[tmpPos];
-            indexes[left++] = tmpIndexes[tmpPos];
+            data[left] = tmp[tmpPos];
+            indexes[left] = tmpIndexes[tmpPos];
+            left++;
         }
     }
 }
