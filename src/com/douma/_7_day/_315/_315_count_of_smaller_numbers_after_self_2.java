@@ -43,6 +43,7 @@ public class _315_count_of_smaller_numbers_after_self_2 {
         merge(nums, lo, mid, hi, tmp);
     }
 
+    // 使用另一种 merge 的方法
     private void merge(int[] data, int left, int mid, int right, int[] tmp) {
         int tmpPos = left;
         int i = left;
