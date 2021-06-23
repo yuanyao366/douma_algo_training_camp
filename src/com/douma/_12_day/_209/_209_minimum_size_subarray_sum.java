@@ -77,6 +77,11 @@ public class _209_minimum_size_subarray_sum {
 
         int ans = Integer.MAX_VALUE;
         for (int i = 1; i < prefixSum.length; i++) {
+            // 说明：这里为什么是 i - 1 呢？
+            // 首先，prefixSum[i] 表达的是原数组中前 i 个元素之和
+            // 那么，原始数组中区间 [i, j] 的区间和等于：prefixSum[j] - prefixSum[i - 1]
+            // 因为 [i, j] 的区间和需要包含 i 对应的元素，所以，减掉的是 i 前面的 prefixSum
+            // 实际上我们要找的就是：prefixSum[j] - prefixSum[i - 1] >= target
             int t = target + prefixSum[i - 1];
             int j = firstGETargetElement(prefixSum, t);
             if (j < 0) continue;
