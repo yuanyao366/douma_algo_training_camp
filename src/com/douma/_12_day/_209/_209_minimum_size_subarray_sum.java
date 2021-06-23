@@ -76,12 +76,28 @@ public class _209_minimum_size_subarray_sum {
         }
 
         int ans = Integer.MAX_VALUE;
+        // 这里需要注意的是 i 是前缀和数组的索引，而非原始数组的索引
+        /*
+            那么 i 为什么从 1 开始呢？
+            假设 i 从 0 开始，那么 prefixSum[0] 表示是原数组前 0 个元素之和，这个没什么意义，因为都不构成区间
+         */
         for (int i = 1; i < prefixSum.length; i++) {
             // 说明：这里为什么是 i - 1 呢？
             // 首先，prefixSum[i] 表达的是原数组中前 i 个元素之和
             // 那么，原始数组中区间 [i, j] 的区间和等于：prefixSum[j] - prefixSum[i - 1]
             // 因为 [i, j] 的区间和需要包含 i 对应的元素，所以，减掉的是 i 前面的 prefixSum
             // 实际上我们要找的就是：prefixSum[j] - prefixSum[i - 1] >= target
+
+            /*
+            我们以下面的数组为例：
+                      nums = [2,3,1,4, 4, 3]
+               prefixSum = [0,2,5,6,10,14,17]
+            i 是 从前缀和数组的第二个元素开始，即 i = 1
+            这个时候比如 j = 3，
+            那么 prefixSum[j] - prefixSum[i] = 4，这个是原始数组区间 [1, 3] 的区间和，即 [i, j] 的区间和
+            prefixSum[j] - prefixSum[i - 1] = 6，这个是原始数组区间 [0, 3] 的区间和，即 [i - 1, j] 的区间和
+            如果你是 prefixSum[j] - prefixSum[i] 的话，就会漏掉了第一个元素，所以这里必须是 i - 1
+             */
             int t = target + prefixSum[i - 1];
             int j = firstGETargetElement(prefixSum, t);
             if (j < 0) continue;
