@@ -53,3 +53,33 @@ var partition = function(nums, lo, hi) {
     [nums[less], nums[hi]] = [nums[hi], nums[less]]
     return less
 }
+
+// 2. 快速排序 - 三路快排
+var sortArray = function(nums) {
+
+    const quickSort = (lo, hi) => {
+        if (lo >= hi) return
+        let i = Math.floor(Math.random() * (hi - lo + 1))+ lo;
+        [nums[i], nums[hi]] = [nums[hi], nums[i]]
+        const pivot = nums[hi]
+        let less = lo, great = hi
+        i = lo
+        while (i <= great) {
+            if (nums[i] < pivot) {
+                [nums[i], nums[less]] = [nums[less], nums[i]]
+                less++
+                i++
+            } else if (nums[i] > pivot) {
+                [nums[i], nums[great]] = [nums[great], nums[i]]
+                great--
+            } else {
+                i++
+            }
+        }
+        quickSort(lo, less - 1)
+        quickSort(great + 1, hi)
+    }
+
+    quickSort(0, nums.length - 1)
+    return nums
+};

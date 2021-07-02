@@ -57,3 +57,27 @@ class Solution:
     def sortArray1(self, nums: List[int]) -> List[int]:
         self.quick_sort(nums, 0, len(nums) - 1);
         return nums
+
+    # 2. 快速排序 - 三路快排
+    def sortArray(self, nums: List[int]) -> List[int]:
+
+        def quick_sort(nums, lo, hi) -> None:
+            if lo >= hi: return
+            i = random.randint(lo, hi)
+            nums[i], nums[hi] = nums[hi], nums[i]
+            pivot, less, great = nums[hi], lo, hi
+            i = lo
+            while i <= great:
+                if nums[i] < pivot:
+                    nums[i], nums[less] = nums[less], nums[i]
+                    less, i = less + 1, i + 1
+                elif nums[i] > pivot:
+                    nums[i], nums[great] = nums[great], nums[i]
+                    great -= 1
+                else:
+                    i += 1
+            quick_sort(nums, lo, less - 1)
+            quick_sort(nums, great + 1, hi)
+
+        quick_sort(nums, 0, len(nums) - 1)
+        return nums

@@ -59,4 +59,38 @@ public:
         swap(nums[less], nums[hi]);
         return less;
     }
+
+    // 2. 快速排序 - 三路切分
+    vector<int> sortArray(vector<int>& nums) {
+        quickSort(nums, 0, (int)nums.size() - 1);
+        return nums;
+    }
+
+    void quickSort(vector<int>& nums, int lo, int hi) {
+        if (lo >= hi) return;
+        int i = rand() % (hi - lo + 1) + lo;
+        swap(nums[i], nums[hi]);
+
+        int pivot = nums[hi];
+
+        int less = lo;
+        int great = hi;
+
+        i = lo;
+        while (i <= great) {
+            if (nums[i] < pivot) {
+                swap(nums[i], nums[less]);
+                less++;
+                i++;
+            } else if (nums[i] > pivot) {
+                swap(nums[i], nums[great]);
+                great--;
+            } else {
+                i++;
+            }
+        }
+
+        quickSort(nums, lo, less - 1);
+        quickSort(nums, great + 1, hi);
+    }
 };
