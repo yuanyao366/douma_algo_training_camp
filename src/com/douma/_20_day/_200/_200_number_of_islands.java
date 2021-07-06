@@ -78,7 +78,8 @@ class UnionFind {
 
         parent = new int[rows * cols];
         rank = new int[rows * cols];
-        for (int i = 0; i < rows * cols; i++) {
+        // bug 修复：i 应该是小于 rows
+        for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (grid[i][j] == '1') {
                     parent[i * cols + j] = i * cols + j;
