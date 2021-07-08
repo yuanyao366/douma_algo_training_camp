@@ -48,11 +48,30 @@ public class _404_sum_of_left_leaves {
         preorder(node.right, node);
     }
 
+    // 需要注意的是：我们完全也可以使用后序遍历的方式来实现计算每一个左叶子节点
+    // 方法一：不返回值
+    // 后序遍历返回所有左叶子之和
+    private void postorder1(TreeNode node, TreeNode parent) {
+        if (node == null) return;
+
+        postorder1(node.left, node);
+        postorder1(node.right, node);
+
+        // 处理当前节点
+        if (node.left == null &&
+                node.right == null &&
+                parent.left == node) {
+            sum += node.val;
+        }
+    }
+
     // DFS 后序遍历
     public int sumOfLeftLeaves2(TreeNode root) {
         return postorder(root, root);
     }
 
+    // 方法二：返回值
+    // 先计算左右子节点的值，再返回根节点的值，本质就是后序遍历
     private int postorder(TreeNode node, TreeNode parent) {
         if (node == null) return 0;
         if (node.left == null &&
