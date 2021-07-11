@@ -1,0 +1,28 @@
+class Solution {
+public:
+    // 贪心策略：只有在开头和结尾两个字符不相等的时候，才去尝试删除开头或者结尾任一个字符
+    // 时间复杂度：O(n)
+    // 空间复杂度：O(1)
+    bool validPalindrome(string s) {
+        if (s.length() <= 1) return true;
+        int left = 0, right = s.length() - 1;
+        while (left < right) {
+            if (s[left] == s[right]) {
+                left++;
+                right--;
+            } else {
+                return validPalindrome(s, left + 1, right) || validPalindrome(s, left, right - 1);
+            }
+        }
+        return true;
+    }
+
+    bool validPalindrome(string s, int left, int right) {
+        while (left < right) {
+            if (s[left] != s[right]) return false;
+            left++;
+            right--;
+        }
+        return true;
+    }
+};
