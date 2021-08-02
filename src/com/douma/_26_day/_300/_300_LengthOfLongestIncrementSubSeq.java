@@ -13,7 +13,7 @@ public class _300_LengthOfLongestIncrementSubSeq {
         if (nums == null || nums.length == 0) return 0;
         int maxLen = 1;
 
-        // 状态：dp[i] 表示以 i 对应元素结尾的时候最长递增子序列的长度
+        // 状态：dp[i] 表示以 nums[i] 结尾时最长递增子序列的长度
         int[] dp = new int[nums.length];
 
         // 状态初始化：单个元素最少有一个递增子序列元素
