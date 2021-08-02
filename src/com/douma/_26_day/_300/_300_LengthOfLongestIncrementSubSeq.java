@@ -19,11 +19,12 @@ public class _300_LengthOfLongestIncrementSubSeq {
         // 状态初始化：单个元素最少有一个递增子序列元素
         Arrays.fill(dp, 1);
 
-        for (int j = 1; j < nums.length; j++) {
-            for (int i = 0; i < j; i++) {
-                if (nums[j] > nums[i]) {
-                    dp[j] = Math.max(dp[i] + 1, dp[j]);
-                    maxLen = Math.max(maxLen, dp[j]);
+        // 代码优化：将 i 和 j 换了一个位置
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    dp[i] = Math.max(dp[j] + 1, dp[i]);
+                    maxLen = Math.max(maxLen, dp[i]);
                 }
             }
         }
