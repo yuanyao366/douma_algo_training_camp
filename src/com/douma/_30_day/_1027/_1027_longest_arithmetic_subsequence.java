@@ -46,7 +46,7 @@ public class _1027_longest_arithmetic_subsequence {
         int n = nums.length;
 
         int ans = 2;
-        // dp[i][j]：表示以 arr[i] 为结尾且公差为 j 的最长等差数列的长度
+        // dp[i][j]：表示以 nums[i] 为结尾且公差为 j 的最长等差数列的长度
         int[][] dp = new int[n][20010];
         for (int i = 0; i < n; i++) Arrays.fill(dp[i], 1);
         for (int i = 0; i < n; i++) {

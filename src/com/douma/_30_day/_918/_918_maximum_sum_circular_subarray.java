@@ -69,7 +69,7 @@ public class _918_maximum_sum_circular_subarray {
             maxSum = Math.max(maxSum, dp[i]);
         }
 
-        // 如果最子数组和小于0，说明数组中全为负数，返回最大负数即可
+        // 如果最子数组和小于 0，说明数组中全为负数，返回最大负数即可
         if (maxSum < 0) return maxSum;
 
         // 2. 在原数组 nums 内求最小子数组和
