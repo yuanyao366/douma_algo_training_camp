@@ -8,14 +8,13 @@ public:
         vector<vector<int>> outputs;
         outputs.push_back(intervals[0]);
         for (int i = 1; i < intervals.size(); i++) {
-            vector<int> lastInterval = outputs.back();
+            vector<int>& lastInterval = outputs.back();
             int currLeft = intervals[i][0];
             int currRight = intervals[i][1];
             if (lastInterval[1] < currLeft) {
                 outputs.push_back(intervals[i]);
             } else {
-                // 这里需要注意：不能是 lastInterval[1] = ...
-                outputs.back()[1] = max(lastInterval[1], currRight);
+                lastInterval[1] = max(lastInterval[1], currRight);
             }
         }
 

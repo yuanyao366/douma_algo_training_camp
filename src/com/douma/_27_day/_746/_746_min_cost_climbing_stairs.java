@@ -54,6 +54,7 @@ public class _746_min_cost_climbing_stairs {
     // 动态规划
     public int minCostClimbingStairs2(int[] cost) {
         int n = cost.length;
+        // 状态 dp[i]：表示走到第 i 个台阶使用的最小花费
         int[] dp = new int[n + 1];
         dp[0] = dp[1] = 0;
         for (int i = 2; i <= n; i++) {
