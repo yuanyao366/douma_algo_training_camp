@@ -56,11 +56,11 @@ public class _115_distinct_subsequences {
                     /*
                     s[i] == t[j]的时候, s[i] 可以选择自己是否跟 t[j]匹配
                         如果匹配，那么 dp[i][j] 其中一部分数量就是 dp[i-1][j-1]
-                        如果选择不匹配（这样可以让前面的字符跟t[j]匹配，毕竟 t 短的,s 长) dp[i][j] 另外一部分就是 dp[i][j - 1]
+                        如果选择不匹配（这样可以让前面的字符跟t[j]匹配，毕竟 t 短的,s 长) dp[i][j] 另外一部分就是 dp[i - 1][j]
                      */
-                    dp[i][j] = dp[i - 1][j - 1] + dp[i][j - 1];
+                    dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
                 } else {
-                    dp[i][j] = dp[i][j - 1];
+                    dp[i][j] = dp[i - 1][j];
                 }
             }
         }

@@ -51,7 +51,7 @@ public class _410_split_array_largest_sum {
 
         dp[0][0] = 0;
         for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= Math.min(i, m); j++) {
+            for (int j = 1; j <= m && j <= i; j++) {
                 for (int l = 0; l < i; l++) {
                     dp[i][j] = Math.min(dp[i][j], Math.max(dp[l][j - 1], prefixSum[i] - prefixSum[l]));
                 }

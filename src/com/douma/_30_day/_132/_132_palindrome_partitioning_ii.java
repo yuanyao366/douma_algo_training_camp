@@ -36,6 +36,7 @@ public class _132_palindrome_partitioning_ii {
     public int minCut(String s) {
         int n = s.length();
 
+        // 这里是在 leetcode 647 之上，做了点改变
         // 定义状态，dp[i][j] 表示子数组区间 [i, j] 对应的子串是否是回文
         boolean[][] dp = new boolean[n][n];
         // 状态初始化
