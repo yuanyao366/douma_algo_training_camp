@@ -17,9 +17,9 @@ public class _165_compare_version_numbers {
                 v1 = v1 * 10 + (version1.charAt(i1) - '0');
                 i1++;
             }
-
-            while (i2 < version1.length() && version1.charAt(i2) != '.') {
-                v2 = v2 * 10 + (version1.charAt(i2) - '0');
+            // bug 修复：这里处理的是 version2
+            while (i2 < version2.length() && version2.charAt(i2) != '.') {
+                v2 = v2 * 10 + (version2.charAt(i2) - '0');
                 i2++;
             }
 
