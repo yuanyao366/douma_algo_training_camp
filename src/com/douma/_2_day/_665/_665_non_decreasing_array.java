@@ -27,7 +27,8 @@ public class _665_non_decreasing_array {
 
                     因为我们的算法是需要保证语义：[0...i] 是非递减的
 
-                    而且我们还要求尽可能少的修改次数，所以我们只能这样来选择策略了：如果 nums[i] < nums[i - 2] 时候修改 nums[i] = nums[i - 1]；如果 nums[i] >= nums[i - 2] 时候修改 nums[i - 1] = nums[i]
+                    而且我们还要求尽可能少的修改次数，这样我们就需要尽可能少的影响 i 及其后面的顺序
+                    所以我们只能这样来选择策略了：如果 nums[i] < nums[i - 2] 时候修改 nums[i] = nums[i - 1]；如果 nums[i] >= nums[i - 2] 时候修改 nums[i - 1] = nums[i]
 
                      比如：[-1,4,2,3]
 
