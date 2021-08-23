@@ -1,9 +1,57 @@
-def divide(self, dividend: int, divisor: int) -> int:
-    if dividend == -2147483648 and divisor == -1:
-        return 2147483647
-    a, b, res = abs(dividend), abs(divisor), 0
-    for x in range(32)[::-1]:
-        if (a >> x) - b >= 0:
-            a = a - (b << x)
-            res = res + (1 << x)
-    return res if (dividend > 0) == (divisor > 0) else -res
+class Solution:
+    # 超时
+    def divide1(self, a: int, b: int) -> int:
+        INT_MIN, INT_MAX = -2**31, 2**31 - 1
+        if a == INT_MIN and b == -1:
+            return INT_MAX
+
+        sign = -1 if (a > 0) ^ (b > 0) else 1
+        if a > 0:
+            a = -a
+        if b > 0:
+            b = -b
+
+        ans = 0
+        while a <= b:
+            a -= b
+            ans += 1
+
+        return sign * ans
+
+    # 超时
+    def divide1(self, a: int, b: int) -> int:
+        INT_MIN, INT_MAX = -2**31, 2**31 - 1
+        if a == INT_MIN and b == -1:
+            return INT_MAX
+
+        sign = -1 if (a > 0) ^ (b > 0) else 1
+        if a > 0:
+            a = -a
+        if b > 0:
+            b = -b
+
+        ans = 0
+        while a <= b:
+            value, k = b, 1
+            while value >= 0xc0000000 and a <= value + value:
+                k += k
+                value += value
+            ans, a = ans + k, a - value
+
+        return sign * ans
+
+    def divide(self, a: int, b: int) -> int:
+        INT_MIN, INT_MAX = -2**31, 2**31 - 1
+        if a == INT_MIN and b == -1:
+            return INT_MAX
+
+        sign = -1 if (a > 0) ^ (b > 0) else 1
+
+        a, b = abs(a), abs(b)
+        ans = 0
+        for i in range(31, -1, -1):
+            if (a >> i) - b >= 0:
+                a = a - (b << i)
+                ans += 1 << i
+
+        return sign * ans

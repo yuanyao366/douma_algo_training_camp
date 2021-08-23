@@ -8,76 +8,93 @@ package com.douma._6_day._29;
  * @作者 : 老汤
  */
 public class _29_divide_two_integers {
-    public int divide(int dividend, int divisor) {
-        // -2147483648 ÷ (-1) = 2147483648
-        if (dividend == 1 << 31 && divisor == -1) return (1 << 31) - 1;
-        // 计算结果的符号
-        int sign = (dividend > 0) ^ (divisor > 0) ? -1 : 1;
-        int a = Math.abs(dividend), b = Math.abs(divisor);
+    // 最初的想法
+    public int divide1(int a, int b) {
+        // 32 位最大值：2^31 - 1 = 2147483647
+        // 32 位最小值：-2^31 = -2147483648
+        // -2147483648 / (-1) = 2147483648 > 2147483647 越界了
+        if (a == Integer.MIN_VALUE && b == -1)
+            return Integer.MAX_VALUE;
+        int sign = (a > 0) ^ (b > 0) ? -1 : 1;
+        // Math.abs(-2147483648) = -2147483648
+        // 环境只支持存储 32 位整数
+        long la = Math.abs((long)a);
+        long lb = Math.abs((long)b);
         int res = 0;
-
-        for (int i = 31; i >= 0; i--) {
-            // bug 修复：如果使用 (a >>> i) >= b 的话，当 b = -2147483648 会出错
-            // 那么 b 为什么会等于 -2147483648，因为 Math.abs(-2147483648) = -2147483648
-            // 如果 (a >>> i) >= -2147483648，这个永远返回 true
-            // 而 (a >>> i) - (-2147483648) >= 0 返回的是 false，这个是我们需要的，
-            // 这里只需要特殊考虑 b = -2147483648 即可，其他情况 b >= 0
-            // 这个时候，走正常的 (a >>> i) - b >= 0 判断即可
-            if ((a >>> i) - b >= 0) {
-                a = a - (b << i);
-                res += 1 << i;
-            }
-        }
-
-        // 当 res == 1 << 31 的时候， -res 也等于 1 << 31
-        return sign * res;
-    }
-
-    // 时间复杂度：O(logn^2)
-    public int divide2(int dividend, int divisor) {
-        // -2147483648 ÷ (-1) = 2147483648
-        if (dividend == 1 << 31 && divisor == -1) return (1 << 31) - 1;
-        // 计算结果的符号
-        int sign = (dividend > 0) ^ (divisor > 0) ? -1 : 1;
-        long a = Math.abs((long)dividend), b = Math.abs((long)divisor);
-        int res = 0;
-        while (a - b >= 0) {
-            long tmp = b;
-            int m = 1;
-            while (tmp << 1 <= a) {
-                tmp <<= 1;
-                m <<= 1;
-            }
-            a = a - tmp;
-            res += m;
-        }
-        return sign * res;
-    }
-
-    // -2147483648
-    // 4   超时
-    // O(n)
-    public int divide1(int dividend, int divisor) {
-        // -2147483648 ÷ (-1) = 2147483648
-        if (dividend == 1 << 31 && divisor == -1) return (1 << 31) - 1;
-        // 计算结果的符号
-        int sign = (dividend > 0) ^ (divisor > 0) ? -1 : 1;
-        int a = Math.abs(dividend), b = Math.abs(divisor);
-        int res = 0;
-        while (a - b >= 0) {
+        while (la >= lb) {
+            la -= lb;
             res++;
-            a -= b;
         }
         return sign * res;
     }
 
-    public static void main(String[] args) {
-        int a = -2147483648;
-        // 最小值 -2147483648 的绝对值还是 -2147483648
-        System.out.println(Math.abs(a));
+    // 因为将 -2147483648 转成正数会越界，但是将 2147483647 转成负数，则不会
+    // 所以，我们将 a 和 b 都转成负数
+    // 时间复杂度：O(n)，n 是最大值 2147483647 --> 10^10
+    public int divide(int a, int b) {
+        // 32 位最大值：2^31 - 1 = 2147483647
+        // 32 位最小值：-2^31 = -2147483648
+        // -2147483648 / (-1) = 2147483648 > 2147483647 越界了
+        if (a == Integer.MIN_VALUE && b == -1)
+            return Integer.MAX_VALUE;
+        int sign = (a > 0) ^ (b > 0) ? -1 : 1;
+        // 环境只支持存储 32 位整数
+        if (a > 0) a = -a;
+        if (b > 0) b = -b;
+        int res = 0;
+        while (a <= b) {
+            a -= b;
+            res++;
+        }
+        return sign * res;
+    }
 
-        System.out.println(a - 4);
+    // 时间复杂度：O(logn * logn)，n 是最大值 2147483647 --> 10^10
+    public int divide3(int a, int b) {
+        if (a == Integer.MIN_VALUE && b == -1)
+            return Integer.MAX_VALUE;
+        int sign = (a > 0) ^ (b > 0) ? -1 : 1;
+        if (a > 0) a = -a;
+        if (b > 0) b = -b;
+        int res = 0;
+        while (a <= b) {
+            int value = b;
+            int k = 1;
+            // 0xc0000000 是十进制 -2^30 的十六进制的表示
+            // 判断 value >= 0xc0000000 的原因：保证 value + value 不会溢出
+            // 可以这样判断的原因是：0xc0000000 是最小值 -2^31 的一半，
+            // 而 a 的值不可能比 -2^31 还要小，所以 value 不可能比 0xc0000000 小
+            // -2^31 / 2 = -2^30
+            while (value >= 0xc0000000 && a <= value + value) {
+                value += value;
+                k += k;
+            }
+            a -= value;
+            res += k;
+        }
+        return sign * res;
+    }
 
-        System.out.println(new _29_divide_two_integers().divide(-1010369383, -2147483648));
+    // 时间复杂度：O(1)
+    public int divide4(int a, int b) {
+        if (a == Integer.MIN_VALUE && b == -1)
+            return Integer.MAX_VALUE;
+        int sign = (a > 0) ^ (b > 0) ? -1 : 1;
+        a = Math.abs(a);
+        b = Math.abs(b);
+        int res = 0;
+        for (int i = 31; i >= 0; i--) {
+            // 首先，右移的话，再怎么着也不会越界
+            // 其次，无符号右移的目的是：将 -2147483648 看成 2147483648
+
+            // 注意，这里不能是 (a >>> i) >= b 而应该是 (a >>> i) - b >= 0
+            // 这个也是为了避免 b = -2147483648，如果 b = -2147483648
+            // 那么 (a >>> i) >= b 永远为 true，但是 (a >>> i) - b >= 0 为 false
+            if ((a >>> i) - b >= 0) { // a >= (b << i)
+                a -= (b << i);
+                res += (1 << i);
+            }
+        }
+        return sign * res;
     }
 }

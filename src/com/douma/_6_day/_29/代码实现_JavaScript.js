@@ -1,7 +1,65 @@
-var divide = function(dividend, divisor) {
-    if (dividend == -2147483648 && divisor == -1) return 2147483647
-    let a = Math.abs(dividend), b = Math.abs(divisor), res = 0
-    const sign = (dividend > 0) ^ (divisor > 0) ? -1 : 1
+/**
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ */
+// 超时
+var divide1 = function(a, b) {
+    const INT_MIN = -Math.pow(2, 31)
+    const INT_MAX = Math.pow(2, 31) - 1
+
+    if (a == INT_MIN && b == -1) return INT_MAX
+
+    const sign = (a > 0) ^ (b > 0) ? -1 : 1
+    if (a > 0) a = -a
+    if (b > 0) b = -b
+
+    let res = 0
+    while (a <= b) {
+        a -= b
+        res++
+    }
+
+    return sign * res
+};
+
+// 超时
+var divide1 = function(a, b) {
+    const INT_MIN = -Math.pow(2, 31)
+    const INT_MAX = Math.pow(2, 31) - 1
+
+    if (a == INT_MIN && b == -1) return INT_MAX
+
+    const sign = (a > 0) ^ (b > 0) ? -1 : 1
+    if (a > 0) a = -a
+    if (b > 0) b = -b
+
+    let res = 0
+    while (a <= b) {
+        let value = b
+        let k = 1
+        while (value >= 0xc0000000 && a <= value + value) {
+            value += value
+            k += k
+        }
+        a -= value
+        res += k
+    }
+
+    return sign * res
+};
+
+var divide = function(a, b) {
+    const INT_MIN = -Math.pow(2, 31)
+    const INT_MAX = Math.pow(2, 31) - 1
+
+    if (a == INT_MIN && b == -1) return INT_MAX
+
+    const sign = (a > 0) ^ (b > 0) ? -1 : 1
+    a = Math.abs(a)
+    b = Math.abs(b)
+
+    let res = 0
     for (let x = 31; x >= 0; x--) {
         if ((a >>> x) - b >= 0) {
             a = a - (b << x)
