@@ -2,6 +2,8 @@ package com.douma._15_day._23;
 
 import com.douma._15_day.ListNode;
 
+import java.util.PriorityQueue;
+
 /**
  * @官方网站 : https://douma.ke.qq.com
  * @微信公众号 : 抖码课堂
@@ -10,10 +12,40 @@ import com.douma._15_day.ListNode;
  * @作者 : 老汤
  */
 public class _23_merge_k_sorted_lists {
+    // 优先队列
+    // 时间复杂度：O(k*n*logk)
+    // 空间复杂度：O(k)
+    public ListNode mergeKLists1(ListNode[] lists) {
+        // 小顶堆
+        PriorityQueue<ListNode> pq
+                = new PriorityQueue<>((o1, o2) -> o1.val - o2.val);
+
+        // O(k*logk)
+        for (ListNode node : lists) { // O(k)
+            // bug 修复：防止链表为空
+            if (node == null) continue;
+            pq.add(node); // O(logk)
+        }
+
+        ListNode dummyNode = new ListNode(-1);
+        ListNode curr = dummyNode;
+        // O(kn*logk)
+        while (!pq.isEmpty()) { // O(kn)
+            ListNode minNode = pq.remove(); // O(logk)
+            curr.next = minNode;
+            curr = curr.next;
+
+            if (minNode.next != null) {
+                pq.add(minNode.next); // O(logk)
+            }
+        }
+        return dummyNode.next;
+    }
+
     // 顺序合并
     // 时间复杂度：O(k^2 * n)
     // 空间复杂度：O(1)
-    public ListNode mergeKLists(ListNode[] lists) {
+    public ListNode mergeKLists2(ListNode[] lists) {
         if (lists == null || lists.length == 0)
             return null;
         ListNode outputList = lists[0];
@@ -26,7 +58,7 @@ public class _23_merge_k_sorted_lists {
     // 分治思想
     // 时间复杂度：O(k*n*logk)
     // 空间复杂度：O(logk)
-    public ListNode mergeKLists2(ListNode[] lists) {
+    public ListNode mergeKLists3(ListNode[] lists) {
         if (lists == null || lists.length == 0)
             return null;
         return merge(lists, 0, lists.length - 1);

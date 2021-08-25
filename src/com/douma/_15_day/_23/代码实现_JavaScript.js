@@ -9,6 +9,9 @@
  * @param {ListNode[]} lists
  * @return {ListNode}
  */
+ // 分治思想
+    // 时间复杂度：O(k*n*logk)
+    // 空间复杂度：O(logk)
 var mergeKLists = function(lists) {
     if (lists.length == 0) return null
     return merge(lists, 0, lists.length - 1)
@@ -43,5 +46,31 @@ var mergeTwoLists = function(l1, l2) {
     }
     if (l1) curr.next = l1
     if (l2) curr.next = l2
+    return dummyNode.next
+};
+
+// 优先队列
+// 时间复杂度：O(k*n*logk)
+// 空间复杂度：O(k)
+var mergeKLists = function(lists) {
+    if (lists.length == 0) return null
+    const pq = new MinPriorityQueue({priority: (node) => node.val})
+
+    for (const node of lists) {
+        if (node == null) continue
+        pq.enqueue(node)
+    }
+
+    const dummyNode = new ListNode()
+    let curr = dummyNode
+    while (pq.size() > 0) {
+        const minNode = pq.dequeue()["element"]
+        curr.next = minNode
+        curr = curr.next
+        if (minNode.next) {
+            pq.enqueue(minNode.next)
+        }
+    }
+
     return dummyNode.next
 };

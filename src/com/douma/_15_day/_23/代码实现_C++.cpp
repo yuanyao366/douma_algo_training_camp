@@ -10,8 +10,43 @@
  */
 class Solution {
 public:
-    // 分治
+    static bool cmp(ListNode* node1, ListNode* node2) {
+        return node1->val > node2->val;
+    }
+
+    // 优先队列
+    // 时间复杂度：O(k*n*logk)
+    // 空间复杂度：O(k)
     ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if (lists.size() == 0) return nullptr;
+        // 使用小顶堆
+        priority_queue<ListNode*, vector<ListNode*>, decltype(&cmp)> pq(cmp);
+
+        for (auto node : lists) {
+            // bug 修复：防止链表为空
+            if (node == nullptr) continue;
+            pq.push(node);
+        }
+
+        ListNode dummyNode;
+        ListNode* curr = &dummyNode;
+        while (!pq.empty()) {
+            ListNode* minNode = pq.top();
+            pq.pop();
+            curr->next = minNode;
+            curr = curr->next;
+            if (minNode->next != nullptr) {
+                pq.push(minNode->next);
+            }
+        }
+
+        return dummyNode.next;
+    }
+
+    // 分治思想
+    // 时间复杂度：O(k*n*logk)
+    // 空间复杂度：O(logk)
+    ListNode* mergeKLists2(vector<ListNode*>& lists) {
         if (lists.size() == 0) return nullptr;
 
         return merge(lists, 0, lists.size() - 1);

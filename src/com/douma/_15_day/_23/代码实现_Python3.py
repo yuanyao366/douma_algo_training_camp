@@ -4,6 +4,31 @@
 #         self.val = val
 #         self.next = next
 class Solution:
+    # 堆和优先队列
+    # 时间复杂度：O(k*n*logk)
+    # 空间复杂度：O(logk)
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        if len(lists) == 0: return None
+        pq = []
+        for i in range(len(lists)):
+            if lists[i]:
+                heapq.heappush(pq, (lists[i].val, i))
+                lists[i] = lists[i].next
+
+        dummy_node = ListNode(-1)
+        curr = dummy_node
+        while pq:
+            val, idx = heapq.heappop(pq)
+            curr.next = ListNode(val)
+            curr = curr.next
+            if lists[idx]:
+                heapq.heappush(pq, (lists[idx].val, idx))
+                lists[idx] = lists[idx].next
+        return dummy_node.next
+
+    # 分治思想
+    # 时间复杂度：O(k*n*logk)
+    # 空间复杂度：O(logk)
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         if len(lists) == 0: return None
         return self.merge(lists, 0, len(lists) - 1)
