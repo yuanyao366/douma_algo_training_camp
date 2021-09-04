@@ -22,6 +22,7 @@ public:
         for (int i = 0; i < nums.size(); i++) {
             if (used[i]) continue;
             // 去重的条件
+            // 对于 !used[i - 1] 的解释请见 issue：https://gitee.com/douma_edu/douma_algo_training_camp/issues/I48M6Q
             if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) continue;
             path.push_back(nums[i]);
             used[i] = true;
