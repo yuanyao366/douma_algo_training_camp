@@ -33,7 +33,7 @@ public class _401_binary_watch {
         int[] nums2 = {32, 16, 8, 4, 2, 1};
 
         List<String> res = new ArrayList<>();
-        // bug 修复：需要等于
+        // bug 修复：需要等于，不然会少一种组合，总共是[0，turnedOn]种
         for (int i = 0; i <= turnedOn; i++) {
             // 拿到 i 个小时的组合
             List<Integer> hours = findCombinations(nums1, i);
