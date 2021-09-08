@@ -17,6 +17,7 @@ class Solution:
         buckets = [[INT_MAX, INT_MIN] for _ in range(bucket_num)]
 
         for num in nums:
+            # bucketId 计算逻辑如何理解，请参考 issue：https://gitee.com/douma_edu/douma_algo_training_camp/issues/I498BD
             bucket_id = (num - min_val) // gap
             buckets[bucket_id][0] = min(buckets[bucket_id][0], num)
             buckets[bucket_id][1] = max(buckets[bucket_id][1], num)

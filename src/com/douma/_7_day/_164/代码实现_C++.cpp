@@ -24,6 +24,7 @@ public:
 
         // 3. 将所有元素添加到对应的桶中
         for (int num : nums) {
+            // bucketId 计算逻辑如何理解，请参考 issue：https://gitee.com/douma_edu/douma_algo_training_camp/issues/I498BD
             int bucketId = (num - minValue) / gap;
             buckets[bucketId][0] = min(buckets[bucketId][0], num);
             buckets[bucketId][1]= max(buckets[bucketId][1], num);

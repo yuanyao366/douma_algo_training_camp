@@ -25,6 +25,7 @@ var maximumGap = function(nums) {
     }
 
     for (const num of nums) {
+        // bucketId 计算逻辑如何理解，请参考 issue：https://gitee.com/douma_edu/douma_algo_training_camp/issues/I498BD
         const bucketId = Math.floor((num - minVal) / gap)
         buckets[bucketId][0] = Math.min(buckets[bucketId][0], num)
         buckets[bucketId][1] = Math.max(buckets[bucketId][1], num)
