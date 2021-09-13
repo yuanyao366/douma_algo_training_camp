@@ -23,7 +23,7 @@ public class _119_pascals_triangle_ii {
         return oneRow;
     }
 
-    // 空间复杂度：O(k^2)
+    // 空间复杂度：O(k)
     public List<Integer> getRow2(int rowIndex) {
         List<Integer> preRow = new ArrayList<>();
         for (int row = 0; row <= rowIndex; row++) {
