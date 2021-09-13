@@ -30,6 +30,9 @@ public class _6_zigzag_conversion {
     }
 
     public String convert2(String s, int numRows) {
+        // bug 修復：如果 numRows == 1 直接返回
+        if (numRows == 1) return s;
+
         StringBuilder[] sbs = new StringBuilder[numRows];
         // bug 修复：需要初始化 StringBuilder 数组
         for (int i = 0; i < numRows; i++) sbs[i] = new StringBuilder();
