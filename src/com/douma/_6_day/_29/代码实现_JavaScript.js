@@ -19,8 +19,8 @@ var divide1 = function(a, b) {
         a -= b
         res++
     }
-
-    return sign * res
+    // bug 修复：因为不能使用乘号，所以将乘号换成三目运算符
+    return sign == 1 ? res : -res
 };
 
 // 超时
@@ -46,7 +46,8 @@ var divide1 = function(a, b) {
         res += k
     }
 
-    return sign * res
+    // bug 修复：因为不能使用乘号，所以将乘号换成三目运算符
+    return sign == 1 ? res : -res
 };
 
 var divide = function(a, b) {
@@ -67,5 +68,6 @@ var divide = function(a, b) {
         }
     }
     if (res == -2147483648) return -2147483648
-    return sign * res
+    // bug 修复：因为不能使用乘号，所以将乘号换成三目运算符
+    return sign == 1 ? res : -res
 };

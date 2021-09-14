@@ -16,7 +16,8 @@ class Solution:
             a -= b
             ans += 1
 
-        return sign * ans
+        # bug 修复：因为不能使用乘号，所以将乘号换成三目运算符
+        return ans if sign == 1 else -ans
 
     # 超时
     def divide1(self, a: int, b: int) -> int:
@@ -38,7 +39,8 @@ class Solution:
                 value += value
             ans, a = ans + k, a - value
 
-        return sign * ans
+        # bug 修复：因为不能使用乘号，所以将乘号换成三目运算符
+        return ans if sign == 1 else -ans
 
     def divide(self, a: int, b: int) -> int:
         INT_MIN, INT_MAX = -2**31, 2**31 - 1
@@ -53,5 +55,5 @@ class Solution:
             if (a >> i) - b >= 0:
                 a = a - (b << i)
                 ans += 1 << i
-
-        return sign * ans
+        # bug 修复：因为不能使用乘号，所以将乘号换成三目运算符
+        return ans if sign == 1 else -ans

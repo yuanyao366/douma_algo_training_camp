@@ -25,7 +25,8 @@ public class _29_divide_two_integers {
             la -= lb;
             res++;
         }
-        return sign * res;
+        // bug 修复：因为不能使用乘号，所以将乘号换成三目运算符
+        return sign == 1 ? res : -res;
     }
 
     // 因为将 -2147483648 转成正数会越界，但是将 2147483647 转成负数，则不会
@@ -46,7 +47,8 @@ public class _29_divide_two_integers {
             a -= b;
             res++;
         }
-        return sign * res;
+        // bug 修复：因为不能使用乘号，所以将乘号换成三目运算符
+        return sign == 1 ? res : -res;
     }
 
     // 时间复杂度：O(logn * logn)，n 是最大值 2147483647 --> 10^10
@@ -72,7 +74,8 @@ public class _29_divide_two_integers {
             a -= value;
             res += k;
         }
-        return sign * res;
+        // bug 修复：因为不能使用乘号，所以将乘号换成三目运算符
+        return sign == 1 ? res : -res;
     }
 
     // 时间复杂度：O(1)
@@ -95,6 +98,7 @@ public class _29_divide_two_integers {
                 res += (1 << i);
             }
         }
-        return sign * res;
+        // bug 修复：因为不能使用乘号，所以将乘号换成三目运算符
+        return sign == 1 ? res : -res;
     }
 }

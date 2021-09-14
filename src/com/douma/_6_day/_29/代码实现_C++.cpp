@@ -24,8 +24,8 @@ public:
             a -= value;
             res += k;
         }
-
-        return sign * res;
+        // bug 修复：因为不能使用乘号，所以将乘号换成三目运算符
+        return sign == 1 ? res : -res;
     }
 
     int divide(int a, int b) {
@@ -41,8 +41,8 @@ public:
             a -= b;
             res++;
         }
-
-        return sign * res;
+        // bug 修复：因为不能使用乘号，所以将乘号换成三目运算符
+        return sign == 1 ? res : -res;
     }
 
     int divide2(int a, int b) {
@@ -59,6 +59,7 @@ public:
                 res += 1 << i;
             }
         }
-        return sign * res;
+        // bug 修复：因为不能使用乘号，所以将乘号换成三目运算符
+        return sign == 1 ? res : -res;
     }
 };
