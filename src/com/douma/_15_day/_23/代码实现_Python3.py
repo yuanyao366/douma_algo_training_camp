@@ -43,6 +43,17 @@ class Solution:
 
         return self.mergeTwoLists(merged_left_list, merged_right_list)
 
+
+    # 顺序合并
+    # 时间复杂度：O(k^2 * n)
+    # 空间复杂度：O(1)
+    def mergeKLists1(self, lists):
+        if len(lists) == 0: return None
+        outputList = lists[0]
+        for i in range(1, len(lists)):
+            outputList = self.mergeTwoLists(outputList, lists[i])
+        return outputList
+
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
         if not l1: return l2
         if not l2: return l1
