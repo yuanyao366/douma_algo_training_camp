@@ -9,15 +9,15 @@
  * @param {ListNode[]} lists
  * @return {ListNode}
  */
- // 分治思想
-    // 时间复杂度：O(k*n*logk)
-    // 空间复杂度：O(logk)
-var mergeKLists = function(lists) {
-    if (lists.length == 0) return null
-    return merge(lists, 0, lists.length - 1)
-};
+// 分治思想
+// 时间复杂度：O(k*n*logk)
+// 空间复杂度：O(logk)
+const mergeKLists = function(lists) {
+        if (lists.length == 0) return null
+        return merge(lists, 0, lists.length - 1)
+    };
 
-var merge = function(lists, left, right) {
+const merge = function(lists, left, right) {
     if (left == right) return lists[left]
     if (left > right) return null
 
@@ -28,7 +28,20 @@ var merge = function(lists, left, right) {
     return mergeTwoLists(mergedLeftList, mergedRightList)
 }
 
-var mergeTwoLists = function(l1, l2) {
+// 顺序合并
+// 时间复杂度：O(k^2 * n)
+// 空间复杂度：O(1)
+const mergeKLists1 = function (lists) {
+    if (lists == null || lists.length == 0)
+        return null
+    let outputList = lists[0];
+    for (let i = 1; i < lists.length; i++) {
+        outputList = mergeTwoLists(outputList, lists[i]);
+    }
+    return outputList;
+}
+
+const mergeTwoLists = function(l1, l2) {
     if (!l1) return l2
     if (!l2) return l1
 
