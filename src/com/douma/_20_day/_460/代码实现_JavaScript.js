@@ -111,7 +111,7 @@ LFUCache.prototype.put = function(key, value) {
     }
     if (this.keyToNode.size == this.capacity) {
         // 删除最少使用的 key
-        removeNode = this.usedCountToKeys.get(this.minUsedCount).popFirst()
+        const removeNode = this.usedCountToKeys.get(this.minUsedCount).popFirst()
         this.keyToNode.delete(removeNode.key)
     }
     // 新增一个缓存中不存在的 key
