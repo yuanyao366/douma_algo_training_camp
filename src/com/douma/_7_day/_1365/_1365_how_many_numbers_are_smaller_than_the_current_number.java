@@ -38,7 +38,7 @@ public class _1365_how_many_numbers_are_smaller_than_the_current_number {
             data[i][1] = i;
         }
 
-        // 按照元素值排序
+        // 按照元素值升序排序
         Arrays.sort(data, (o1, o2) -> o1[0] - o2[0]);
 
         int[] ans = new int[n];
