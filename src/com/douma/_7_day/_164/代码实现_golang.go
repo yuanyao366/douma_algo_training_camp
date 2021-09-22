@@ -10,9 +10,7 @@ func maximumGap1(nums []int) int {
         return 0
     }
 
-    sort.Slice(nums, func(i, j int) bool {
-        return nums[i] < nums[j]
-    })
+    sort.Ints(nums)
 
     var maxGap = 0
     for i := 1; i < len(nums); i++ {
