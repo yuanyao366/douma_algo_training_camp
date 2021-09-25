@@ -26,7 +26,8 @@ public class _237_delete_node_in_a_linked_list {
             不要从你的函数中返回任何结果。
      */
 
-    public void deleteNode(ListNode node) {
+    // 时间复杂度：O(n)
+    public void deleteNode1(ListNode node) {
         ListNode prev = null;
         while (node != null) {
             ListNode next = node.next;
@@ -38,5 +39,16 @@ public class _237_delete_node_in_a_linked_list {
             prev = node;
             node = node.next;
         }
+    }
+
+    // 代码优化
+    // 时间复杂度：O(1)
+    public void deleteNode(ListNode node) {
+        // 实际上，我们只需要将下一个节点的值覆盖掉要删除的节点的值就可以
+        node.val = node.next.val;
+        // 然后将下一个节点从链表中断开
+        ListNode next = node.next;
+        node.next = next.next;
+        next.next = null;
     }
 }

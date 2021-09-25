@@ -24,7 +24,11 @@ func divide1(a int, b int) int {
         a -= b
         res++
     }
-    return sign * res
+    if sign == 1 {
+        return res
+    } else {
+        return -res
+    }
 }
 
 // 超时 时间复杂度：O(logn * logn)，n 是最大值 2147483647 --> 10^10
@@ -60,7 +64,11 @@ func divide2(a int, b int) int {
         a -= value
         res += k
     }
-    return sign * res
+    if sign == 1 {
+        return res
+    } else {
+        return -res
+    }
 }
 
 // 时间复杂度：O(1)
@@ -84,7 +92,11 @@ func divide(a int, b int) int {
             res += 1 << i
         }
     }
-    return sign * res
+    if sign == 1 {
+        return res
+    } else {
+        return -res
+    }
 }
 
 func abs(a int) int {
