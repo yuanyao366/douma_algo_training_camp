@@ -77,6 +77,7 @@ public class _1047_remove_all_adjacent_duplicates_in_string {
             fast++;
         }
 
-        return s.substring(0, slow + 1);
+        // bug 修复：需要将 chars 中的前 slow 个字符组成新的字符串
+        return new String(chars, 0, slow + 1);
     }
 }
