@@ -11,6 +11,7 @@
  */
 class Solution {
 public:
+    // 思考：如果把数组变成链表的话，你会怎么实现呢？见 leetcode ：https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/
     TreeNode* sortedArrayToBST(vector<int>& nums) {
         return buildTree(nums, 0, nums.size() - 1);
     }

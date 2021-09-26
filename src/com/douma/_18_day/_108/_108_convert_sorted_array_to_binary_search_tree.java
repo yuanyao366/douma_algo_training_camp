@@ -37,6 +37,7 @@ public class _108_convert_sorted_array_to_binary_search_tree {
     nums 按 严格递增 顺序排列
      */
 
+    // 思考：如果把数组变成链表的话，你会怎么实现呢？见 leetcode ：https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/
     public TreeNode sortedArrayToBST(int[] nums) {
         return buildBST(nums, 0, nums.length - 1);
     }

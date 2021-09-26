@@ -5,6 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    # 思考：如果把数组变成链表的话，你会怎么实现呢？见 leetcode ：https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/
     def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
 
         def build_tree(nums: List[int], left: int, right: int) -> TreeNode:

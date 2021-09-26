@@ -10,6 +10,7 @@
  * @param {number[]} nums
  * @return {TreeNode}
  */
+// 思考：如果把数组变成链表的话，你会怎么实现呢？见 leetcode ：https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/
 var sortedArrayToBST = function(nums) {
     const buildTree = (nums, left, right) => {
         if (left > right) return null
