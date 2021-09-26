@@ -43,7 +43,7 @@ func reverse(arr []int) {
 func postorderTraversal(root *TreeNode) []int {
     var res = make([]int, 0)
 
-    var postOrder func(node *TreeNode)
+    var postOrder func(*TreeNode)
     postOrder = func(node *TreeNode) {
         if node == nil {
             return

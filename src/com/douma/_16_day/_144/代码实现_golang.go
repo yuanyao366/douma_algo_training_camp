@@ -35,7 +35,7 @@ func preorderTraversal1(root *TreeNode) []int {
 func preorderTraversal(root *TreeNode) []int {
     var res = make([]int, 0)
 
-    var preOrder func(node *TreeNode)
+    var preOrder func(*TreeNode)
     preOrder = func(node *TreeNode) {
         if node == nil {
             return

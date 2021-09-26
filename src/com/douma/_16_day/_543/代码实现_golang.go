@@ -9,7 +9,7 @@
 func diameterOfBinaryTree(root *TreeNode) int {
     var ans = 0
 
-    var maxDepth func(node *TreeNode) int
+    var maxDepth func(*TreeNode) int
     maxDepth = func(node *TreeNode) int {
         if node == nil {
             return 0

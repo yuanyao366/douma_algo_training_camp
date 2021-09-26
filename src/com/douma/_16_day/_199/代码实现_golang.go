@@ -41,7 +41,7 @@ func rightSideView1(root *TreeNode) []int {
 func rightSideView(root *TreeNode) []int {
     var res = make([]int, 0)
 
-    var preOrder func(node *TreeNode, currLevel int)
+    var preOrder func(*TreeNode, int)
     preOrder = func(node *TreeNode, currLevel int) {
         if node == nil {
             return

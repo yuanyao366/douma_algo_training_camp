@@ -77,7 +77,7 @@ func maxDepth2(root *TreeNode) int {
 func maxDepth3(root *TreeNode) int {
     var res = 0
 
-    var preOrder func(node *TreeNode, currDepth int)
+    var preOrder func(*TreeNode, int)
     preOrder = func(node *TreeNode, currDepth int) {
         if node == nil {
             return

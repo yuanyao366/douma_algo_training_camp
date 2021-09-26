@@ -33,7 +33,7 @@ func inorderTraversal1(root *TreeNode) []int {
 func inorderTraversal(root *TreeNode) []int {
     var res = make([]int, 0)
 
-    var inOrder func(node *TreeNode)
+    var inOrder func(*TreeNode)
     inOrder = func(node *TreeNode) {
         if node == nil {
             return

@@ -10,7 +10,7 @@
 func sumOfLeftLeaves1(root *TreeNode) int {
     var sum = 0
 
-    var preOrder func(node *TreeNode, parent *TreeNode)
+    var preOrder func(*TreeNode, *TreeNode)
     preOrder = func(node *TreeNode, parent *TreeNode) {
         if node == nil {
             return
@@ -33,7 +33,7 @@ func sumOfLeftLeaves1(root *TreeNode) int {
 func sumOfLeftLeaves2(root *TreeNode) int {
     var sum = 0
 
-    var postOrder func(node *TreeNode, parent *TreeNode)
+    var postOrder func(*TreeNode, *TreeNode)
     postOrder = func(node *TreeNode, parent *TreeNode) {
         if node == nil {
             return
@@ -54,7 +54,7 @@ func sumOfLeftLeaves2(root *TreeNode) int {
 
 // DFS 后序遍历 + 返回值
 func sumOfLeftLeaves3(root *TreeNode) int {
-    var postOrder func(node *TreeNode, parent *TreeNode) int
+    var postOrder func(*TreeNode, *TreeNode) int
     postOrder = func(node *TreeNode, parent *TreeNode) int {
         if node == nil {
             return 0
