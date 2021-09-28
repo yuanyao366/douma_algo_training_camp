@@ -28,12 +28,12 @@ public class _1_20210926 {
         int[] parents = new int[n + 1];
         parents[1] = 1;
         for (int i = 0; i < n - 1; i++) {
-            data[i + 2] = Integer.parseInt(datum[i]);
+            parents[i + 2] = Integer.parseInt(datum[i]);
         }
 
         int res = 0;
         for (int i = 1; i < n + 1; i++) {
-            for (int j = 1; j < n + 1; j++) {
+            for (int j = i + 1; j < n + 1; j++) {
                 if (isAncestor(i, j, parents) && isSquareNumber(data[i] * data[j])) {
                     res++;
                 }
