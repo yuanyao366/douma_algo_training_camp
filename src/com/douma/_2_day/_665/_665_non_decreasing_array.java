@@ -16,7 +16,7 @@ public class _665_non_decreasing_array {
 
                 if (i - 2 >= 0 && nums[i] < nums[i - 2]) {
                     nums[i] = nums[i - 1];
-                } else {
+                } else { // 注意：实际上这个 else 分支是可以去掉的
                     /*
                     解释这里为什么是这样修改：
                     如果 nums[i] >= nums[i - 2] 时候，修改 nums[i] = nums[i - 1] 的话，会导致：修改 nums[i] 后，会影响 i 及其后面的顺序
