@@ -19,7 +19,7 @@ public:
 
         for (int i = 0; i < nums.size(); i++) {
             if (used[i]) continue;
-            path.push_back(nums[i]);
+            path.emplace_back(nums[i]);
             used[i] = true;
             dfs(nums, path, res, used);
             path.pop_back();
