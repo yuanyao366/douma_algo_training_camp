@@ -46,8 +46,6 @@ class Solution:
 
         return len(res[min_value])
 
-        return dfs(amount)
-
     # 3. 回溯 (前序遍历)
     def coinChange3(self, coins: List[int], amount: int) -> int:
         min_coins, cs = 2**31 - 1, []
