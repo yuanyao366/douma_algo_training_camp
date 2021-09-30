@@ -62,7 +62,7 @@ public class _62_unique_paths {
         return dp[0][0];
     }
 
-    // 2. 动态规划（左上到右下） - 状态压缩
+    // 3. 动态规划（左上到右下） - 状态压缩
     public int uniquePaths3(int m, int n) {
         // dp[i][j]：表示从位置 [i, j] 到 [m - 1, n - 1] 的路径数
         int[] dp = new int[n];
