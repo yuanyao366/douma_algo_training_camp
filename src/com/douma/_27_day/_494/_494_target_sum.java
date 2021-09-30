@@ -45,7 +45,7 @@ public class _494_target_sum {
 
         int neg = diff / 2;
 
-        // 在数组 nums 列表中不可重复的选择数字组合，使得组合中所有数字之和为 ne
+        // 在数组 nums 列表中不可重复的选择数字组合，使得组合中所有数字之和为 neg
         // 求有多少组合数？
         int[] dp = new int[neg + 1];
         dp[0] = 1;
