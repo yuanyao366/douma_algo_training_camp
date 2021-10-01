@@ -34,6 +34,7 @@ def is_square_number(num):
     return False
 
 
+# issue 讨论：https://gitee.com/douma_edu/douma_algo_training_camp/issues/I4C16V
 # 暴力解法
 # 时间复杂度：O(n^2 * logn)
 # 空间复杂度：O(1)

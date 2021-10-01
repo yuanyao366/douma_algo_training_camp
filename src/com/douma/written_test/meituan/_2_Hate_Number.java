@@ -8,6 +8,8 @@ import java.util.Scanner;
  * @作者 : 老汤
  */
 public class _2_Hate_Number {
+    // issue 讨论：https://gitee.com/douma_edu/douma_algo_training_camp/issues/I4CCL0
+
     // 时间复杂度：O(n * sqrt(m))，其中 n 的规模是 10^5， m 的规模大小为 2 * 10^4
     // 总的数据规模最大是 10^7 ( = 10^5 * 10^2) ，
     // 也就是相当于数据规模为 10^7，时间复杂度为 O(n)，注意这里的 n = 10^7，这个是不会超时的

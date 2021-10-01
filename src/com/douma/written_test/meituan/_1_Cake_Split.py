@@ -2,6 +2,7 @@
 # 作者：老汤
 
 if __name__ == '__main__':
+    # issue 讨论：https://gitee.com/douma_edu/douma_algo_training_camp/issues/I4BZ4A
     # 第一行是切的刀数
     n = int(input())
 

@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @作者 : 老汤
  */
 public class _1_Cake_Split {
-
+    // issue 讨论：https://gitee.com/douma_edu/douma_algo_training_camp/issues/I4BZ4A
     // 时间复杂度：O(n)
     // 空间复杂度：O(1)
     public static void main(String[] args) {

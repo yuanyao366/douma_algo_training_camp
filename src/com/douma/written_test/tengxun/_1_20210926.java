@@ -7,6 +7,7 @@ import java.util.Scanner;
  *
  * @作者 : 老汤
  */
+// issue 讨论：https://gitee.com/douma_edu/douma_algo_training_camp/issues/I4C16V
 public class _1_20210926 {
     // 暴力解法
     // 时间复杂度：O(n^2 * logn)
