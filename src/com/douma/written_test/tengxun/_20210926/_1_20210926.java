@@ -1,4 +1,4 @@
-package com.douma.written_test.tengxun;
+package com.douma.written_test.tengxun._20210926;
 
 import java.util.Scanner;
 

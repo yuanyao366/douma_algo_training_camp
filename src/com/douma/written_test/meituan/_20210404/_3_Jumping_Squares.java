@@ -1,4 +1,4 @@
-package com.douma.written_test.meituan;
+package com.douma.written_test.meituan._20210404;
 
 import java.util.Scanner;
 
