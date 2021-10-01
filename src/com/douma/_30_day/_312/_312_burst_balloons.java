@@ -34,7 +34,7 @@ public class _312_burst_balloons {
 
      */
 
-    // 动态回归
+    // 动态规划
     // 状态定义：dp[i][j] 表示不戳破 i 与 j ，仅戳破 i 与 j 之间的气球我们能得到的最大金币数
     // 状态转移方程：
     //  dp[i][j] = max {dp[i][k] + dp[k][j] + nums[i]*nums[k]*nums[j]} | i < k < j

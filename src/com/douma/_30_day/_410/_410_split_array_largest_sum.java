@@ -35,7 +35,7 @@ public class _410_split_array_largest_sum {
     1 <= m <= min(50, nums.length)
      */
 
-    // 和 813 类似
+    // 和 leetcode 813 类似
     public int splitArray(int[] nums, int m) {
         int n = nums.length;
         int[] prefixSum = new int[n + 1];

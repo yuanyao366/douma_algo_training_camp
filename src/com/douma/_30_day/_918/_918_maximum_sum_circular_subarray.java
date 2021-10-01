@@ -57,7 +57,7 @@ public class _918_maximum_sum_circular_subarray {
         1. 假设数组不是环形数组，这个时候只需要按照 leetcode 53 那样在数组内求最大子数组和
         2. 假设数组是环形数组，而且最大子数组和的子数组包含了首尾两个元素
             这种情况，我们只需要求出数组内最小子数组和，然后使用数组累加和减去最小子数组和即可
-        最后，染回上面两种情况的最大值
+        最后，返回上面两种情况的最大值
      */
     public int maxSubarraySumCircular(int[] nums) {
         // 1. 在原数组 nums 内求最大子数组和，参考 leetcode 53 号算法题：最大子序和
