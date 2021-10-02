@@ -27,6 +27,7 @@ public class _4_Grace_String_优化1 {
         int res = 1;
         for (int i = 0; i < 26; i++) {
             res *= (charCnt[i] + 1);
+            res %= 20210101;
         }
 
         System.out.println(res);

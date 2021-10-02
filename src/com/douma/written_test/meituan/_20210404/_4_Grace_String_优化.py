@@ -13,5 +13,6 @@ if __name__ == '__main__':
     res = 1
     for i in range(26):
         res *= (char_cnt[i] + 1)
+        res %= 20210101
 
     print(res)
