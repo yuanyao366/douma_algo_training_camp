@@ -19,25 +19,23 @@ class TreeNode {
 public class _1_TreePruning {
 
     public TreeNode pruning(TreeNode root) {
-        return trimLeafNodes(root, root);
+        return trimLeafNodes(root);
     }
 
     // 修剪以 node 为根节点的树中的叶子节点，并返回修剪后的树的根节点
-    private TreeNode trimLeafNodes(TreeNode node, TreeNode parent) {
+    private TreeNode trimLeafNodes(TreeNode node) {
         // 如果树是空的，或者只有一个节点，那么直接返回空树
         if (node == null || isLeaf(node)) return null;
 
         // 如果当前节点 node 的左右孩子有一个是叶子节点
         // 那么删除这个节点，也就是将这个节点从树中脱离掉，并返回空树
         if (isLeaf(node.left) || isLeaf(node.right)) {
-            parent.left = null;
-            parent.right = null;
             return null;
         }
 
         // 递归的去左子树、右子树中修剪叶子节点
-        node.left = trimLeafNodes(node.left, node);
-        node.right = trimLeafNodes(node.right, node);
+        node.left = trimLeafNodes(node.left);
+        node.right = trimLeafNodes(node.right);
         return node;
     }
 
@@ -59,9 +57,9 @@ public class _1_TreePruning {
         TreeNode node9 = new TreeNode(10);
 
         root.left = node1;
-        //root.right = node2;
+        root.right = node2;
 
-        //node1.left = node3;
+        node1.left = node3;
         node3.left = node4;
         node3.right = node5;
 
