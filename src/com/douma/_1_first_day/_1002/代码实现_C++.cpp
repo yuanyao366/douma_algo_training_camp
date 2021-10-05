@@ -16,7 +16,8 @@ public:
         for (int i = 0; i < 26; i++) {
             for (int j = 0; j < minfreq[i]; j++) {
                 ans.emplace_back(1, i + 'a');
-                // 上面这一行代码等价于下面的代码
+                // 上面这一行代码等价于下面的代码，
+                // 解释请见 issue 讨论：https://gitee.com/douma_edu/douma_algo_training_camp/issues/I4CQD6
                 // ans.push_back(string(1, i + 'a'));
             }
         }
