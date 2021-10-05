@@ -33,5 +33,10 @@ int* findDuplicates(int* nums, int numsSize, int* returnSize){
         }
     }
 
+    //释放掉堆内存，防止内存泄漏
+    free(count);
+    //释放掉堆内存后，将此指针和NULL绑定，以防止count成为野指针
+    count = NULL;
+
     return pret;
 }
