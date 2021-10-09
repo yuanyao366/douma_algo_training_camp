@@ -84,7 +84,8 @@ public class _138_copy_list_with_random_pointer {
         while (!stack.isEmpty()) {
             ListNode curr = stack.pop();
             ListNode newNode = new ListNode(curr.val);
-            newHead.next = newHead;
+            // bug 修复：这里是 newNode
+            newNode.next = newHead;
             newHead = newNode;
         }
 
