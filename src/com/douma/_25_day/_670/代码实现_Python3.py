@@ -1,7 +1,8 @@
 class Solution:
     def maximumSwap(self, num: int) -> int:
         # 计算每位上数字出现的最后索引位置
-        chars, last = list(str(num)), [0] * 26
+        # bug 修复：从 0 到 9 有 10 个数字，所以 last 的长度是 10
+        chars, last = list(str(num)), [0] * 10
         for i in range(len(chars)):
             last[ord(chars[i]) - ord('0')] = i
 
