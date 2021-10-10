@@ -49,7 +49,7 @@ if __name__ == '__main__':
         if needed_bricks[i] <= k:
             zeros += 1
             k -= needed_bricks[i]
-        if k == 0:
+        else:
             break
 
     # 最终的答案是：间隔的个数减去填平间隔的个数再 + 1
