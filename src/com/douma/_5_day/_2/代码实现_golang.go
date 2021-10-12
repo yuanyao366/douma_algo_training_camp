@@ -17,11 +17,11 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
             y = l2.Val
         }
 
-        sum := x + y + carry
-        curr.Next = &ListNode{Val: sum % 10}
+        total := x + y + carry
+        curr.Next = &ListNode{Val: total % 10}
         // bug 修复：视频中忘了加上这一步
         curr = curr.Next
-        carry = sum / 10
+        carry = total / 10
 
         if l1 != nil {
             l1 = l1.Next

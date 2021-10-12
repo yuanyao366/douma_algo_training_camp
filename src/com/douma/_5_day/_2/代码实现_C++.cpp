@@ -7,10 +7,10 @@ public:
             int x = l1 ? l1->val : 0;
             int y = l2 ? l2->val : 0;
 
-            int sum = x + y + carry;
-            curr->next = new ListNode(sum % 10);
+            int total = x + y + carry;
+            curr->next = new ListNode(total % 10);
             curr = curr->next;
-            carry = sum / 10;
+            carry = total / 10;
 
             if (l1) l1 = l1->next;
             if (l2) l2 = l2->next;
