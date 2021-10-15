@@ -1,5 +1,5 @@
 # 抖码算法，让算法学习变得简单有趣
-# 作者：老汤
+# 作者：小莹
 
 # 稳固积木
 # 时间复杂度：O(nlogn)
@@ -27,6 +27,9 @@ if __name__ == '__main__':
     for i in range(1, n):
         diff = weights[i] - weights[i - 1]
         if diff > x:
+            # 要分 diff 是不是 x 的整数倍
+            # 比如间隔 9 ~ 13 的 diff 值是 4， 是 x = 2 的 2 倍
+            # 这个时候只需要 1 个任意木头，就可以填平了
             if diff / x > diff // x:
                 needed_bricks.append(diff // x)
             else:
