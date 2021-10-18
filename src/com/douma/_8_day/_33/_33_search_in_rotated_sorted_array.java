@@ -8,6 +8,7 @@ package com.douma._8_day._33;
  * @作者 : 老汤
  */
 public class _33_search_in_rotated_sorted_array {
+    // 时间复杂度：O(logn)，注意，视频中说时间复杂度是 O(n)，这是口误
     public int search(int[] nums, int target) {
         if (nums == null || nums.length == 0)
             return -1;

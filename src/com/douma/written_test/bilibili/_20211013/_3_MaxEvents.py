@@ -2,25 +2,36 @@
 # 作者：老汤
 import heapq
 
-events = [[6, 2], [2, 3], [3, 4]]
-
-# https://leetcode-cn.com/problems/maximum-number-of-events-that-can-be-attended/
-
 if __name__ == '__main__':
-    ans = 0
-    end = list()
-    # 排序：开始时间小的在前。这样是方便我们顺序遍历，把开始时间一样的都放进堆
-    events = sorted(events, reverse=True)
-    # 结果、开始时间、events下标、有多少组数据
-    res, last, i, n = 0, 1, 0, len(events)
-    while i < n and len(end) < 0:
-        # 将 start 相同的会议都放进堆里
-        while events and events[-1][0] == i:
-            heapq.heappush(end, events.pop()[1])
-        while end and end[0] < i:
-            heapq.heappop(end)
-        if end:
-            heapq.heappop(end)
-            ans += 1
+    # 输入：[[1,2],[2,3],[3,4]]
+    # 得到： [1,2],[2,3],[3,4]
+    data = str(input())[1:-1].split(",")
+    n = len(data) // 2
+    events = [[0] * 2 for _ in range(n)]
+    for i in range(n):
+        events[i][0] = int(data[i * 2][1:])
+        events[i][1] = int(data[i * 2 + 1][0:-1])
 
-    print(ans)
+    # 按照开始时间升序排列，这样，对于相同开始时间的会议，可以一起处理
+    events.sort(key=lambda x: x[0])
+
+    # 小顶堆：用于高效的维护最小的 endDay
+    pq = []
+    res, curr_day, i = 0, 1, 0
+    while i < n or len(pq):
+        # 将所有开始时间等于 currDay 的会议的结束时间放到小顶堆
+        while i < n and events[i][0] == curr_day:
+            heapq.heappush(pq, events[i][1])
+            i += 1
+        # 将已经结束的会议弹出堆中，即堆顶的结束时间小于 currDay 的
+        while len(pq) and pq[0] < curr_day:
+            heapq.heappop(pq)
+        # 贪心的选择结束时间最小的会议参加
+        if len(pq):
+            # 参加的会议，就从堆中删除
+            heapq.heappop(pq)
+            res += 1
+        # 当前的天往后走一天，开始看下下一天能不能参加会议
+        curr_day += 1
+
+    print(res)
