@@ -1,3 +1,4 @@
+// 时间复杂度：O(logn)，注意，视频中说时间复杂度是 O(n)，这是口误
 func search(nums []int, target int) int {
     if len(nums) == 0 {
         return -1

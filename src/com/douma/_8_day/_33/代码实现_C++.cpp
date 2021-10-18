@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // 时间复杂度：O(logn)，注意，视频中说时间复杂度是 O(n)，这是口误
     int search(vector<int>& nums, int target) {
         int left = 0, right = nums.size() - 1;
         while (left <= right) {

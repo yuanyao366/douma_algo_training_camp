@@ -2,6 +2,7 @@ from typing import List
 
 
 class Solution:
+    # 时间复杂度：O(logn)，注意，视频中说时间复杂度是 O(n)，这是口误
     def search(self, nums: List[int], target: int) -> int:
         left, right = 0, len(nums) - 1
         while left <= right:
