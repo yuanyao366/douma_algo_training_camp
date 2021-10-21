@@ -138,7 +138,7 @@ public class _301_remove_invalid_parentheses {
         path.append(c);
         // 可能的操作 2：保留当前遍历到的字符
         if (c != '(' && c != ')') {
-            dfs(index + 1, leftRemove, rightRemove, leftCount, leftCount, path);
+            dfs(index + 1, leftRemove, rightRemove, leftCount, rightCount, path);
         } else if (c == '(') {
             dfs(index + 1, leftRemove, rightRemove, leftCount + 1, rightCount, path);
         } else if (rightCount < leftCount) {
