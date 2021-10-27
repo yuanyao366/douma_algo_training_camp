@@ -12,6 +12,7 @@ if __name__ == '__main__':
 
     s = str(input())
 
+    # 1. 将字母和数字分开
     chars, nums = [], []
     for i in range(len(s)):
         if is_char(s[i]):
@@ -19,9 +20,13 @@ if __name__ == '__main__':
         elif is_digit(s[i]):
             nums.append(s[i])
 
+    # 2. 对字母升序排列
     chars.sort()
+    # 对数字降序排列
     nums.sort(reverse=True)
 
+    # 3. 根据排序后的字母以及数字，再根据原先字母和数字的位置
+    # 拼接有序的字母和数字
     chars_index, nums_index = 0, 0
     res = []
     for c in s:
