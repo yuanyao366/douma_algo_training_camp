@@ -1,5 +1,5 @@
 # 抖码算法，让算法学习变得简单有趣
-# 作者：老汤
+# 作者：菲菲
 
 # 两个数组中元素差的平方最接近 k^2
 # 时间复杂度：O((m + n)logn)
@@ -16,17 +16,19 @@ if __name__ == '__main__':
         for j in range(m):
             b[j] = int(data[j])
 
+        # 时间复杂度：O(nlogn)
         a.sort()
 
         ans = float("inf")
         left, right = 0, n - 1
         # 对 a 应用二分
+        # 时间复杂度：O(mlogn)
         while left <= right:
-            i = left + (right - left) // 2
+            mid = left + (right - left) // 2
             min_square = float("inf")
             # 对 b 的话线性扫描
             for j in range(m):
-                square = (a[i] - b[j]) ** 2
+                square = (a[mid] - b[j]) ** 2
                 if abs(square - k * k) < ans:
                     min_square = square
                     ans = abs(square - k * k)
@@ -37,7 +39,7 @@ if __name__ == '__main__':
             # 因为左半区的元素更小，那么 min_square 就会更小，那么 abs(min_square - k^2) 只会更大
             # 去右半区的话，那么 min_square 就有可能会变大，那么 abs(min_square - k^2) 可能会比之前更小
             if min_square < k * k:
-                left = i + 1
+                left = mid + 1
             else:
-                right = i - 1
+                right = mid - 1
         print(ans)

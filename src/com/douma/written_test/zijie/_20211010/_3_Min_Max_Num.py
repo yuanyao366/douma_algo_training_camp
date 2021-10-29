@@ -1,5 +1,5 @@
 # 抖码算法，让算法学习变得简单有趣
-# 作者：老汤
+# 作者：小莹
 
 
 def sort_min_num(s):
@@ -32,6 +32,7 @@ def sort_min_num(s):
 
     return "".join(res)
 
+
 # 火柴可以组成的最大最小数
 # 动态规划
 if __name__ == '__main__':
@@ -60,13 +61,8 @@ if __name__ == '__main__':
             for j in range(i - 2, 1, -1):
                 tmp = min_dp[i - j] + min_dp[j]
                 tmp = sort_min_num(tmp)
-                if min_dp[i] == "":
+                if min_dp[i] == "" or int(tmp) < int(min_dp[i]):
                     min_dp[i] = tmp
-                else:
-                    if len(tmp) < len(min_dp[i]):
-                        min_dp[i] = tmp
-                    elif len(tmp) == len(min_dp[i]):
-                        min_dp[i] = min(min_dp[i], tmp)
                 if j <= i - j:
                     break
 
