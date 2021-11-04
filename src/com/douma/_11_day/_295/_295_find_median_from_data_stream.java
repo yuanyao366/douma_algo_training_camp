@@ -255,7 +255,6 @@ class MedianFinder5 {
         int lower = 0;
         int upper = 0;
         for (int num = 0; num < 101; num++) {
-            if (count[num] > 0) lastNonZero = num;
             cnt += count[num];
             if (cnt >= size / 2 + 1) {
                 upper = num;
@@ -266,8 +265,18 @@ class MedianFinder5 {
                 }
                 break;
             }
+            // bug 修复：设置最后一个出现的数字
+            if (count[num] > 0) lastNonZero = num;
         }
         return (lower + upper) * 0.5;
+    }
+
+    public static void main(String[] args) {
+        MedianFinder5 medianFinder5 = new MedianFinder5();
+        medianFinder5.addNum(2);
+        System.out.println(medianFinder5.findMedian());
+        medianFinder5.addNum(3);
+        System.out.println(medianFinder5.findMedian());
     }
 }
 
@@ -319,4 +328,5 @@ class MedianFinder {
         }
         return (lower + upper) * 0.5;
     }
+
 }
