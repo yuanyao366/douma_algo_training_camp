@@ -248,7 +248,7 @@ class MedianFinder5 {
     // 返回目前所有元素的中位数。
     // 时间复杂度：O(101) -> O(1)
     public double findMedian() {
-        int cnt = 0;
+        int cnt = 0, prevCnt = 0;
         boolean isEven = size % 2 == 0;
 
         int lastNonZero = 0;
@@ -258,7 +258,8 @@ class MedianFinder5 {
             cnt += count[num];
             if (cnt >= size / 2 + 1) {
                 upper = num;
-                if (isEven) {
+                // bug 修复：偶数并且中间两个元素不是同一个元素
+                if (isEven && prevCnt + 1 == cnt) {
                     lower = lastNonZero;
                 } else {
                     lower = upper;
@@ -267,15 +268,18 @@ class MedianFinder5 {
             }
             // bug 修复：设置最后一个出现的数字
             if (count[num] > 0) lastNonZero = num;
+            prevCnt = cnt;
         }
         return (lower + upper) * 0.5;
     }
 
     public static void main(String[] args) {
         MedianFinder5 medianFinder5 = new MedianFinder5();
-        medianFinder5.addNum(2);
+        medianFinder5.addNum(1);
         System.out.println(medianFinder5.findMedian());
-        medianFinder5.addNum(3);
+        medianFinder5.addNum(2);
+        //medianFinder5.addNum(3);
+        //medianFinder5.addNum(8);
         System.out.println(medianFinder5.findMedian());
     }
 }
