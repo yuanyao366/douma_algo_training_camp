@@ -7,6 +7,8 @@ class Solution:
         lookup_table = set(nums)
         ans = 1
         for num in nums:
+            # 这里会存在重复计算，为什么会产生以及如何解决，请参考 issue：
+            # https://gitee.com/douma_edu/douma_algo_training_camp/issues/I4H4RZ
             if num - 1 in lookup_table: continue
             curr_num, count = num, 1
             while curr_num + 1 in lookup_table:

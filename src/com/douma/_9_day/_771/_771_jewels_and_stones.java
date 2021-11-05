@@ -60,7 +60,9 @@ public class _771_jewels_and_stones {
     // 时间复杂度：O(n)
     // 空间复杂度：O(1)
     public int numJewelsInStones(String jewels, String stones) {
-        int[] count = new int[58];
+        // count 中存储 A 到 Z 中的所有的字符，包含 58 个字符
+        int len = 'z' - 'A' + 1;
+        int[] count = new int[len];
         for (char c : jewels.toCharArray()) count[c - 'A'] = 1;
 
         int ans = 0;

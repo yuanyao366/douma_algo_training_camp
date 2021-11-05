@@ -7,6 +7,8 @@ public:
 
         int ans = 1;
         for (int num : nums) {
+            // 这里会存在重复计算，为什么会产生以及如何解决，请参考 issue：
+            // https://gitee.com/douma_edu/douma_algo_training_camp/issues/I4H4RZ
             if (set.count(num - 1)) continue;
             int currNum = num;
             int count = 1;

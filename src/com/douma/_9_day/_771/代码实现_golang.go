@@ -35,7 +35,8 @@ func numJewelsInStones(jewels string, stones string) int {
 // 时间复杂度：O(n)
 // 空间复杂度：O(1)
 func numJewelsInStones3(jewels string, stones string) int {
-    var jewelsMap = [58]int{}
+    var len = 'z' - 'A' + 1
+    var jewelsMap = make([]int, len)
     for _, c := range jewels {
         jewelsMap[c - 'A'] = 1
     }
