@@ -84,9 +84,12 @@ public class _209_minimum_size_subarray_sum {
         for (int i = 1; i < prefixSum.length; i++) {
             // 说明：这里为什么是 i - 1 呢？
             // 首先，prefixSum[i] 表达的是原数组中前 i 个元素之和
-            // 那么，原始数组中区间 [i, j] 的区间和等于：prefixSum[j] - prefixSum[i - 1]
-            // 因为 [i, j] 的区间和需要包含 i 对应的元素，所以，减掉的是 i 前面的 prefixSum
+            // 那么，原始数组中区间 [i, j) 的区间和等于：prefixSum[j] - prefixSum[i - 1]
+            // 因为 [i, j) 的区间和需要包含 i 对应的元素，所以，减掉的是 i 前面的 prefixSum
             // 实际上我们要找的就是：prefixSum[j] - prefixSum[i - 1] >= target
+
+            // 为什么 [i, j) 是右开的呢？
+            // 因为 prefixSum[j] 表示的是原始数组前 j 个元素的和，前 j 个元素中不会包括索引为 j 的元素
 
             /*
             我们以下面的数组为例：
@@ -94,8 +97,8 @@ public class _209_minimum_size_subarray_sum {
                prefixSum = [0,2,5,6,10,14,17]
             i 是 从前缀和数组的第二个元素开始，即 i = 1
             这个时候比如 j = 3，
-            那么 prefixSum[j] - prefixSum[i] = 4，这个是原始数组区间 [1, 2] 的区间和，即 [i, j - 1] 的区间和
-            prefixSum[j] - prefixSum[i - 1] = 6，这个是原始数组区间 [0, 2] 的区间和，即 [i - 1, j - 1] 的区间和
+            那么 prefixSum[j] - prefixSum[i] = 4，这个是原始数组区间 [1, 2] 的区间和，即 [i, j) 的区间和
+            prefixSum[j] - prefixSum[i - 1] = 6，这个是原始数组区间 [0, 2] 的区间和，即 [i - 1, j) 的区间和
             如果你是 prefixSum[j] - prefixSum[i] 的话，就会漏掉了第一个元素，所以这里必须是 i - 1
              */
             int t = target + prefixSum[i - 1];
