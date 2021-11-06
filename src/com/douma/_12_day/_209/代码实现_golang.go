@@ -50,8 +50,8 @@ func minSubArrayLen(target int, nums []int) int {
             prefixSum = [0,2,5,6,10,14,17]
         i 是 从前缀和数组的第二个元素开始，即 i = 1
         这个时候比如 j = 3，
-        那么 prefixSum[j] - prefixSum[i] = 4，这个是原始数组区间 [1, 2] 的区间和，即 [i, j] 的区间和
-        prefixSum[j] - prefixSum[i - 1] = 6，这个是原始数组区间 [0, 2] 的区间和，即 [i - 1, j] 的区间和
+        那么 prefixSum[j] - prefixSum[i] = 4，这个是原始数组区间 [1, 2] 的区间和，即 [i, j - 1] 的区间和
+        prefixSum[j] - prefixSum[i - 1] = 6，这个是原始数组区间 [0, 2] 的区间和，即 [i - 1, j - 1] 的区间和
         如果你是 prefixSum[j] - prefixSum[i] 的话，就会漏掉了第一个元素，所以这里必须是 i - 1
             */
         var t = target + prefixSum[i - 1]
