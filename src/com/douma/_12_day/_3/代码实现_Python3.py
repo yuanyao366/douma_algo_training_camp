@@ -23,6 +23,7 @@ class Solution:
         left = right = 0
         while right < n:
             right_char_index = window.get(s[right], -1)
+            # 下面这样代码的详细解释请见：https://gitee.com/douma_edu/douma_algo_training_camp/issues/I4JB1P
             left = max(left, right_char_index)
             max_len = max(max_len, right - left + 1)
             window[s[right]] = right + 1

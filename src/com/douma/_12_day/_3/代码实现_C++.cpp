@@ -36,6 +36,7 @@ public:
             char currChar = s[right];
             unordered_map<char, int>::iterator it = window.find(currChar);
             int currCharIndex = (it == window.end() ? -1 : it->second);
+            // 下面这样代码的详细解释请见：https://gitee.com/douma_edu/douma_algo_training_camp/issues/I4JB1P
             left = max(left, currCharIndex);
             maxLen = max(maxLen, right - left + 1);
 

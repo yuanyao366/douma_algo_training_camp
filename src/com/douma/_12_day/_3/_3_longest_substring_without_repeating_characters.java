@@ -108,6 +108,7 @@ public class _3_longest_substring_without_repeating_characters {
         while (right < n) {
             char rightChar = s.charAt(right);
             int rightCharIndex = window.getOrDefault(rightChar, 0);
+            // 下面这样代码的详细解释请见：https://gitee.com/douma_edu/douma_algo_training_camp/issues/I4JB1P
             left = Math.max(left, rightCharIndex);
             maxLen = Math.max(maxLen, right - left + 1);
             window.put(rightChar, right + 1);

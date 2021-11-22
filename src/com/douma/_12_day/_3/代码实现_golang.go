@@ -78,6 +78,7 @@ func lengthOfLongestSubstring3(s string) int {
         if _, ok := window[rightChar]; ok {
             rightCharIndex = window[rightChar]
         }
+        // 下面这样代码的详细解释请见：https://gitee.com/douma_edu/douma_algo_training_camp/issues/I4JB1P
         if rightCharIndex > left {
             left = rightCharIndex
         }

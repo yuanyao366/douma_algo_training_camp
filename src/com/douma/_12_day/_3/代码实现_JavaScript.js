@@ -33,6 +33,7 @@ var lengthOfLongestSubstring2 = function(s) {
     let maxLen = 0
     while (right < n) {
         const rightCharIndex = window.has(s[right]) ? window.get(s[right]) : -1
+        // 下面这样代码的详细解释请见：https://gitee.com/douma_edu/douma_algo_training_camp/issues/I4JB1P
         left = Math.max(left, rightCharIndex)
         maxLen = Math.max(maxLen, right - left + 1)
         window.set(s[right], right + 1)
