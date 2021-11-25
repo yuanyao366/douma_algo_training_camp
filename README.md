@@ -27,8 +27,8 @@
 
 **以上三个链接中的内容，都支持 Java/C++/Python/js/go 五种语言** 
 
-4. 如果你还想搞定算法笔试，那么你还需要[点击这里](https://gitee.com/douma_edu/douma_algo_training_camp/issues?label_ids=124665069&label_text=%E5%A4%A7%E5%8E%82%E7%AE%97%E6%B3%95%E7%AC%94%E8%AF%95)
+4. 如果你还想搞定**算法笔试**，那么你还需要[点击这里](https://gitee.com/douma_edu/douma_algo_training_camp/issues?label_ids=124665069&label_text=%E5%A4%A7%E5%8E%82%E7%AE%97%E6%B3%95%E7%AC%94%E8%AF%95)
 
-5. 抖码算法试听课：[点击这里](https://ke.qq.com/course/3171403?flowToken=1040858)
+5. 抖码算法**试听课**：[点击这里](https://ke.qq.com/course/3171403?flowToken=1040858)
 
 # 帮助不少的同学入职国内外好公司~
