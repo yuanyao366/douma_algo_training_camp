@@ -35,7 +35,6 @@ class Solution:
 
     def merge(self, lists: List[ListNode], left: int, right: int) -> ListNode:
         if left == right: return lists[left]
-        if left > right: return None
 
         mid = left + (right - left) // 2
         merged_left_list = self.merge(lists, left, mid)

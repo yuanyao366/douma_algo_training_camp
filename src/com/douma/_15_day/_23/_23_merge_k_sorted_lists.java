@@ -66,7 +66,6 @@ public class _23_merge_k_sorted_lists {
 
     private ListNode merge(ListNode[] lists, int left, int right) {
         if (left == right) return lists[left];
-        if (left > right) return null;
 
         int mid = left + (right - left) / 2;
 

@@ -82,9 +82,6 @@ func merge(lists []*ListNode, left int, right int) *ListNode {
     if left == right {
         return lists[left]
     }
-    if left > right {
-        return nil
-    }
 
     var mid = left + (right - left) / 2
 

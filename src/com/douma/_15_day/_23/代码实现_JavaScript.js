@@ -19,7 +19,6 @@ const mergeKLists = function(lists) {
 
 const merge = function(lists, left, right) {
     if (left == right) return lists[left]
-    if (left > right) return null
 
     const mid = left + Math.floor((right - left) / 2)
     const mergedLeftList = merge(lists, left, mid)
