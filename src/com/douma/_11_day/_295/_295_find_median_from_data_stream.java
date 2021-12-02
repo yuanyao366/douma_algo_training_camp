@@ -248,6 +248,8 @@ class MedianFinder5 {
     // 返回目前所有元素的中位数。
     // 时间复杂度：O(101) -> O(1)
     public double findMedian() {
+        // cnt 表示到当前数字为止，一共出现的数字的个数
+        // prevCnt 表示到前一个数字为止，一共出现的数字的个数
         int cnt = 0, prevCnt = 0;
         boolean isEven = size % 2 == 0;
 
@@ -259,6 +261,20 @@ class MedianFinder5 {
             if (cnt >= size / 2 + 1) {
                 upper = num;
                 // bug 修复：偶数并且中间两个元素不是同一个元素
+                // 比如数组 [1,2,2,2,2,2,2,8]，这个时候 upper = num = 2
+                // 按照之前的逻辑的话，因为是偶数，所以 upper = num, lower = lastNonZero，也就是 upper = 2, lower = 1，这是不对的
+                // 上面之所以不对，是因为中间的两个元素都是 2，所以不能单纯的考虑是偶数， 还需要加上 prevCnt + 1 == cnt
+                // 因为只有 prevCnt + 1 == cnt 就可以确定中间两个元素肯定不是相同的
+
+                // 比如数组 [1,1,2,3,4,5] 这个时候 upper = num = 3
+                // cnt = 4(到当前数字 3 为止，一共出现了 4 个数字)
+                // prevCnt = 3(到前一个数字 2 为止，一共出现了 3 个数字)
+                // 这个时候 prevCnt + 1 == cnt，表明中间的两个数字不相同
+
+                // 再比如数组 [1,2,2,2,2,2,2,8]，这个时候 upper = num = 2
+                // cnt = 7(到当前数字 2 为止，一共出现了 7 个数字)
+                // prevCnt = 1(到前一个数字 1 为止，一共出现了 1 个数字)
+                // 这个时候 prevCnt + 1 != cnt，表明中间的两个数字相同，既然相同的话，那么 lower 和 upper 相等
                 if (isEven && prevCnt + 1 == cnt) {
                     lower = lastNonZero;
                 } else {
