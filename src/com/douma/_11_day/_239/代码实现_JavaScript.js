@@ -27,7 +27,9 @@ var maxSlidingWindow = function(nums, k) {
     const ans = []
     const deque = []
     for (let i = 0; i < nums.length; i++) {
-        while (deque.length && deque[0] <= i - k) {
+        // 说明：这里的 while 可以使用 if 来代替，因为：
+        // 要维护一个大小为 k 的窗口的话，每次最多只需要处理一个元素即可
+        if (deque.length && deque[0] <= i - k) {
             deque.shift()
         }
         while (deque.length && nums[i] > nums[deque[deque.length - 1]]) {

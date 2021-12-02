@@ -27,7 +27,9 @@ class Solution:
         ans = []
         d = collections.deque()
         for i in range(len(nums)):
-            while d and d[0] <= i - k:
+            # 说明：这里的 while 可以使用 if 来代替，因为：
+            # 要维护一个大小为 k 的窗口的话，每次最多只需要处理一个元素即可
+            if d and d[0] <= i - k:
                 d.popleft()
             while d and nums[i] > nums[d[-1]]:
                 d.pop()

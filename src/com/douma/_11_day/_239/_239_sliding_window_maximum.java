@@ -84,7 +84,9 @@ public class _239_sliding_window_maximum {
         Deque<Integer> deque = new LinkedList<>();
         for (int i = 0; i < nums.length; i++) {
             // 保证队列里面最多只有 k 个元素
-            while (!deque.isEmpty() && deque.peek() <= i - k) {
+            // 说明：这里的 while 可以使用 if 来代替，因为：
+            // 要维护一个大小为 k 的窗口的话，每次最多只需要处理一个元素即可
+            if (!deque.isEmpty() && deque.peek() <= i - k) {
                 deque.poll();
             }
             // 如果当前的滑动窗口中有两个下标 i 和 j，其中 i 在 j 的左侧（i < j），并且 i 对应的元素不大于 j 对应的元素（nums[i]≤nums[j]）

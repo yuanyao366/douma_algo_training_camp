@@ -25,7 +25,9 @@ public:
         vector<int> ans;
         deque<int> d;
         for (int i = 0; i < nums.size(); i++) {
-            while (!d.empty() && d.front() <= i - k) {
+            // 说明：这里的 while 可以使用 if 来代替，因为：
+            // 要维护一个大小为 k 的窗口的话，每次最多只需要处理一个元素即可
+            if (!d.empty() && d.front() <= i - k) {
                 d.pop_front();
             }
             while (!d.empty() && nums[i] > nums[d.back()]) {
