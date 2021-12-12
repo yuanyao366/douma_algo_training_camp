@@ -56,7 +56,9 @@ public class _Jianzhi51_ReversePairs {
             } else if (tmp[i] <= tmp[j]) {
                 data[k] = tmp[i++];
             } else { // tmp[i] > tmp[j]
-                data[k] = data[j++];
+                // 注意：这里使用 data 和 tmp 都是一样的
+                // 原因：在合并的时候是从左往右去修改 data 的，所以 data 的没有修改的后半部分和 tmp 的后半部分是一样的
+                data[k] = tmp[j++];
                 // 计算 temp[j] 的逆序对
                 count += mid - i + 1;
             }
