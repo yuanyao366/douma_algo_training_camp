@@ -100,7 +100,7 @@ public class _221_maximal_square {
 
         int ans = 0;
 
-        // dp[i][j] 表示以 [i, j] 这个元素为右下角的最大的正方形的边长 
+        // 状态压缩为一维数组 
         // 行的长度和列的长度都增加 1，有利于边界条件的处理
         int[] dp = new int[n + 1];
 

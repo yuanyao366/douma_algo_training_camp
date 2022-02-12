@@ -35,7 +35,7 @@ public:
         int n = matrix[0].size();
         int ans = 0;
 
-        // 初始化状态数组
+        // 状态压缩为一维数组 
         // 行的长度和列的长度都增加 1，有利于边界条件的处理
         vector<int> dp(n + 1);
 

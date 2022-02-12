@@ -32,6 +32,7 @@ var maximalSquare2 = function(matrix) {
     const m = matrix.length, n = matrix[0].length
     let ans = 0
 
+    // 状态压缩为一维数组 
     const dp = new Array(n + 1).fill(0)
 
     for (let i = 1; i <= m; i++) {

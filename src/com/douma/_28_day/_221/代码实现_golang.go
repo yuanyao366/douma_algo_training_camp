@@ -81,7 +81,7 @@ func maximalSquare(matrix [][]byte) int {
 func maximalSquare2(matrix [][]byte) int {
     var m, n, ans = len(matrix), len(matrix[0]), 0
 
-    // dp[i][j] 表示以 [i, j] 这个元素为右下角的最大的正方形的边长 
+    // 状态压缩为一维数组 
     // 行的长度和列的长度都增加 1，有利于边界条件的处理 
     var dp = make([]int, n + 1)
 

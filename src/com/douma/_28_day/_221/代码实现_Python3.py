@@ -26,6 +26,7 @@ class Solution:
     def maximalSquare2(self, matrix: List[List[str]]) -> int:
         m, n, ans = len(matrix), len(matrix[0]), 0
 
+        # 状态压缩为一维数组 
         dp = [0] * (n + 1)
 
         for i in range(1, m + 1):
