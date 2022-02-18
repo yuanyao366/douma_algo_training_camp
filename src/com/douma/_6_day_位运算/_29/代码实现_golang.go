@@ -59,6 +59,11 @@ func divide2(a int, b int) int {
         // -2^31 / 2 = -2^30
         for value >= 0xc0000000 && a <= value + value {
             value += value
+            // 代码优化：如果 k 已经大于最大值的一半的话，那么直接返回最小值
+            // 因为这个时候 k += k 的话肯定会大于等于 2147483648 ，这个超过了题目给的范围
+            if k > math.MaxInt32 / 2 {
+                return math.MinInt32
+            }
             k += k
         }
         a -= value
@@ -73,30 +78,37 @@ func divide2(a int, b int) int {
 
 // 时间复杂度：O(1)
 func divide(a int, b int) int {
-    if a == math.MinInt32 && b == -1 {
-        return math.MaxInt32
+    if (a == INT_MIN && b == -1) return INT_MAX;
+
+    int res = 0;
+    // 处理边界，防止转正数溢出
+    // 除数绝对值最大，结果必为 0 或 1
+    if (b == INT_MIN) {
+        return a == b? 1 : 0;
     }
 
-    sign := 1
-    if (a > 0 && b < 0) || (a < 0 && b > 0) {
-        sign = -1
+    // 被除数先减去一个除数
+    if (a == INT_MIN) {
+        a -= -abs(b);
+        res += 1;
     }
 
-    a = abs(a)
-    b = abs(b)
+    int sign = (a > 0) ^ (b > 0) ? -1 : 1;
 
-    res := 0
-    for i := 31; i >= 0; i-- {
-        if (a >> i) - b >= 0 {
-            a = a - (b << i)
-            res += 1 << i
+    int ua = abs(a);
+    int ub = abs(b);
+    for (int i = 31; i >= 0; i--) {
+        if ((ua >> i) >= ub) {
+            ua = ua - (ub << i);
+            // 代码优化：这里控制 ans 大于等于 INT_MAX
+            if (res > INT_MAX - (1 << i)) {
+                return INT_MIN;
+            }
+            res += 1 << i;
         }
     }
-    if sign == 1 {
-        return res
-    } else {
-        return -res
-    }
+    // bug 修复：因为不能使用乘号，所以将乘号换成三目运算符
+    return sign == 1 ? res : -res;
 }
 
 func abs(a int) int {

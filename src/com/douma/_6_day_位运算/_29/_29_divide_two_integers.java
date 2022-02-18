@@ -69,6 +69,11 @@ public class _29_divide_two_integers {
             // -2^31 / 2 = -2^30
             while (value >= 0xc0000000 && a <= value + value) {
                 value += value;
+                // 代码优化：如果 k 已经大于最大值的一半的话，那么直接返回最小值
+                // 因为这个时候 k += k 的话肯定会大于等于 2147483648 ，这个超过了题目给的范围
+                if (k > Integer.MAX_VALUE / 2) {
+                    return Integer.MIN_VALUE;
+                }
                 k += k;
             }
             a -= value;
@@ -95,6 +100,10 @@ public class _29_divide_two_integers {
             // 那么 (a >>> i) >= b 永远为 true，但是 (a >>> i) - b >= 0 为 false
             if ((a >>> i) - b >= 0) { // a >= (b << i)
                 a -= (b << i);
+                // 代码优化：这里控制 res 大于等于 INT_MAX
+                if (res > Integer.MAX_VALUE - (1 << i)) {
+                    return Integer.MIN_VALUE;
+                }
                 res += (1 << i);
             }
         }
