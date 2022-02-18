@@ -1,0 +1,40 @@
+package com.douma._27_day_动态规划二.knapsack;
+
+/**
+ * @官方网站 : https://douma.ke.qq.com
+ * @微信公众号 : 抖码课堂
+ * @官方微信号 : bigdatatang01
+ * 抖码算法，让算法学习变的简单有趣
+ * @作者 : 老汤
+ */
+public class _4_Knapsack01 {
+
+    public int knapsack01(int[] w, int[] v, int C) {
+        // 1. 状态定义：dp[c] : 将物品放入容量为 c 的背包中产生的最大价值
+        int[] dp = new int[C + 1];
+
+        // 2. 状态初始化
+        // 考虑将第 0 号物品放入背包中
+        for (int c = 0; c <= C; c++) {
+            dp[c] = (c >= w[0] ? v[0] : 0);
+        }
+
+        // 3. 状态转移
+        for (int i = 1; i < w.length; i++) {
+            for (int c = C; c >= w[i]; c--) {
+                dp[c] = Math.max(dp[c], v[i] + dp[c - w[i]]);
+            }
+        }
+
+        return dp[C];
+    }
+
+
+    public static void main(String[] args) {
+        _4_Knapsack01 k = new _4_Knapsack01();
+        int w[] = {3, 4, 5, 2};
+        int v[] = {15, 10, 12, 8};
+
+        System.out.println(k.knapsack01(w, v, 10));
+    }
+}
