@@ -6,6 +6,7 @@ public:
             if (flowerbed[i] == 1) {
                 i += 2;
             } else if (i == len - 1 || flowerbed[i + 1] == 0) {
+                // 注意：必须将 i == flowerbed.length - 1 放在前面， 否则 i + 1 可能会越界
                 n--;
                 i += 2;
             } else {

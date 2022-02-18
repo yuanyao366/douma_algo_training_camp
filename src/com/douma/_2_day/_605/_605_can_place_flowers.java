@@ -15,6 +15,7 @@ public class _605_can_place_flowers {
                 // 如果当前花坛已经种花，那么至少需要到 i + 2 的地方才能种花
                 i += 2;
             } else if (i == flowerbed.length - 1 || flowerbed[i + 1] == 0) {
+                // 注意：必须将 i == flowerbed.length - 1 放在前面， 否则 i + 1 可能会越界
                 // i 没有种花，且是最后一个花坛
                 // i 和 i + 1 的位置都没有种花
                 // 那么 i 处肯定可以种植一朵花
