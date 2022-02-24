@@ -1,5 +1,6 @@
 package com.douma._27_day_动态规划二.knapsack;
 
+
 /**
  * @官方网站 : https://douma.ke.qq.com
  * @微信公众号 : 抖码课堂
@@ -17,6 +18,8 @@ public class _6_KnapsackComplete {
 
     private int[] w;
     private int[] v;
+
+    private int max = 0;
 
     public int knapsack01(int[] w, int[] v, int C) {
         this.w = w;
@@ -50,5 +53,16 @@ public class _6_KnapsackComplete {
         int v[] = {15, 10, 12};
 
         System.out.println(k.knapsack01(w, v, 10));
+    }
+
+    // 完全背包回溯法也可以这样来实现
+    private void dfs1(int price, int c) {
+        if (c <= 0) {
+            return;
+        }
+        max = Math.max(max, price);
+        for (int i = 0; i < w.length; i++) {
+            dfs1(v[i] + price, c - w[i]);
+        }
     }
 }
