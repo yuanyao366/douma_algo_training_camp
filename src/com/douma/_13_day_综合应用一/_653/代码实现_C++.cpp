@@ -47,7 +47,8 @@ bool findTarget1(TreeNode* root, int target) {
 }
 
 
-bool find(TreeNode* node, int target, unordered_set<int> set) {
+// 注意 c++ 的 set 需要传址，而非传值
+bool find(TreeNode* node, int target, unordered_set<int>& set) {
     if (node == nullptr) return false;
     if (set.count(target - node->val)) return true;
     set.insert(node->val);
