@@ -4,6 +4,10 @@ public:
     // 时间复杂度：O(nlogn)
     // 空间复杂度：O(n)
     vector<int> maxSlidingWindow1(vector<int>& nums, int k) {
+        // tips：这里维护的是大顶堆
+        // 两个元素值不想等的话，那么元素大的放在前面，
+        // 如果两个元素值相等的话，坐标大的放在前面，这样坐标 小于等于 i - k 的机会就会少点，这样删除的动作就会少发生了，
+        // 其实元素相等的时候哪个放在前面，哪个放在后面，都无所谓的
         priority_queue<pair<int, int>> pq;
         for (int i = 0; i < k; i++) pq.emplace(nums[i], i);
 

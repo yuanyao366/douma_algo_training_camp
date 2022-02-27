@@ -11,7 +11,7 @@ import java.util.ArrayDeque;
  */
 public class LeftLastLarger {
     /*
-        题目：找出数组中左边离我最近比我小的元素
+        题目：找出数组中左边离我最近比我大的元素
         一个整数数组 nums，找到每个元素：左边第一个比我小的下标位置，没有则用 -1 表示。
         输入：[1, 2]
         输出：[-1, 0]
@@ -39,4 +39,5 @@ public class LeftLastLarger {
         }
         return ans;
     }
+
 }
