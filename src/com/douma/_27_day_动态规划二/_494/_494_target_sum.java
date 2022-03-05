@@ -35,7 +35,7 @@ public class _494_target_sum {
     // (sum - neg) - neg = target => neg = (sum - target) / 2
     // 在数组 nums 列表中不可重复的选择数字组合，使得组合中所有数字之和为 neg(背包容量)
     // 求有多少组合数？
-    // 0 - 1 背包问题
+    // 0 - 1 背包问题，一维状态数组实现，下面有二维状态数组实现
     public int findTargetSumWays(int[] nums, int target) {
         int sum = 0;
         for (int num : nums) sum += num;
@@ -56,6 +56,49 @@ public class _494_target_sum {
         }
 
         return dp[neg];
+    }
+
+    // 0 - 1 背包问题，二维状态数组实现
+    // 物品：数组中的元素
+    // 背包容量：neg
+    public int findTargetSumWays3(int[] nums, int target) {
+        int sum = 0;
+        for (int num : nums) sum += num;
+
+        int diff = sum - target;
+        if (diff < 0 || diff % 2 == 1) return 0;
+
+        int neg = diff / 2;
+
+        // 在数组 nums 列表中不可重复的选择数字组合，使得组合中所有数字之和为 neg
+        // 求有多少组合数？
+
+        // 1. 状态定义：dp[i][c] 表示选择前 i 个数字组合，组合中所有数字之和为 c 的组合数
+        // i 表示前 i 个数字，注意是个，所以 i 的取值范围为 [0...nums.length + 1]
+        int[][] dp = new int[nums.length + 1][neg + 1];
+
+        for (int c = 0; c <= neg; c++) {
+            // 考虑不选择任何数字
+            dp[0][c] = c == 0 ? 1 : 0;
+        }
+
+        for (int i = 1; i <= nums.length; i++) {
+            for (int c = 0; c <= neg; c++) {
+                int num = nums[i - 1];
+                // 如果容量小于数字，那么表示不能选 num
+                if (c < num) {
+                    dp[i][c] = dp[i - 1][c];
+                } else {
+                    // 这里 c >= num，有两种情况：
+                    // ① 不选 num ，那么方案数为：dp[i - 1][c]
+                    // ② 选 num，那么方案数为 dp[i - 1][c - num]
+                    // 总方案数为 ① + ②
+                    dp[i][c] = dp[i - 1][c] + dp[i - 1][c - num];
+                }
+            }
+        }
+
+        return dp[nums.length][neg];
     }
 
     // DFS 解法
