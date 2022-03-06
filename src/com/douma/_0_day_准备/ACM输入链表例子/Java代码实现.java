@@ -1,4 +1,4 @@
-package com.douma._0_day_准备;
+package com.douma._0_day_准备.ACM输入链表例子;
 
 import java.util.Scanner;
 
@@ -7,7 +7,7 @@ import java.util.Scanner;
  *
  * @作者 : 老汤
  */
-public class Test {
+public class Java代码实现 {
     /*
     ACM 模式下，如果输入的是链表，
     需要自己根据输入数据，在内存中构建链表
@@ -22,6 +22,7 @@ public class Test {
             this.val = val;
         }
     }
+
     public static void main(String[] args) {
         // 2. 然后构建一个单链表
         Scanner scanner = new Scanner(System.in);
