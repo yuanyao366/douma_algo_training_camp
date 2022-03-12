@@ -9,7 +9,9 @@ class Solution:
             dp[i][0] = False
         # 3. 前前一个元素匹配空字符串并且当前字符是 * ，那么是匹配
         for i in range(1, n + 1):
-            if i >= 2 and dp[0][i - 2] and p[i - 1] == '*':
+            # 提示：这里不可以不用判断 i < 2，原因是：
+            # 目中的提示最后一条说了，如果是 * 的话，那么前面肯定有字符
+            if p[i - 1] == '*' and (i < 2 or dp[0][i - 2]):
                 dp[0][i] = True
         for i in range(1, m + 1):
             for j in range(1, n + 1):
