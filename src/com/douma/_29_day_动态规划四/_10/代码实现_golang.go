@@ -24,6 +24,8 @@ func isMatch(s string, p string) bool {
                 dp[i][j] = dp[i - 1][j - 1]
             } else if p[j - 1] == '*' {
                // 需要再往回看一个
+               // 注意，这里之所以不要判断 j 是否大于等于 2 的原因是：
+               // 题目中的提示最后一条说了，如果是 * 的话，那么前面肯定有字符
                if s[i - 1] == p[j - 2] || p[j - 2] == '.' {
                    dp[i][j] = dp[i - 1][j] || dp[i][j - 2]
                } else {
