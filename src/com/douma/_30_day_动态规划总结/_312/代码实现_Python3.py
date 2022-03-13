@@ -28,6 +28,9 @@ class Solution:
 
         # 状态转移方程(计算不戳破 i 与 j ，仅戳破 i 与 j 之间的气球我们能得到的最大金币数)：
         #  dp[i][j] = max {dp[i][k] + dp[k][j] + nums[i]*nums[k]*nums[j]} | i < k < j
+        # 这里 i 从右往左遍历的原因：
+        # dp[i][j] 依赖于 dp[k][j] ，然而 k 又是大于 i 的，所以需要先计算数组右边的状态
+        # 也就是 i 需要从右往左遍历
         for i in range(length - 2, -1, -1):
             # 这里 +2 的原因：保证 (i, j) 之间肯定 1 个元素，因为没有元素的话，dp[i][j] 就等于 0
             for j in range(i + 2, length):
