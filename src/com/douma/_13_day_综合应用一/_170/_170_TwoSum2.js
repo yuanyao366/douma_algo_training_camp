@@ -16,7 +16,7 @@ class TwoSum {
 
     find(value) {
         for (const key of this.nums.keys()) {
-            const target = value = key
+            const target = value - key
             if (target == key && this.nums.get(target) > 1) return true
             if (target != key && this.nums.has(target)) return true
         }
