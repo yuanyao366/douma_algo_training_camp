@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class TreeExample2 {
 
-    /* 98. 验证二叉搜索树
+    /* 力扣 98. 验证二叉搜索树
     给定一个二叉树，判断其是否是一个有效的二叉搜索树。
     假设一个二叉搜索树具有如下特征：
         1.节点的左子树只包含小于当前节点的数。
@@ -61,6 +61,8 @@ public class TreeExample2 {
 
         String[] values = scanner.nextLine().split(",");
         int n = values.length;
+
+        // 1. 构造一棵树
         TreeNode[] nodes = new TreeNode[n];
         for (int i = 0; i < n; i++) {
             String val = values[i];
@@ -76,10 +78,13 @@ public class TreeExample2 {
             }
         }
 
+        // 2. 拿到树的根节点
         TreeNode root = nodes[0];
 
+        // 3. 判断这棵树是否是二叉查找树
         boolean res = isValidBST(root);
 
+        // 4. 打印结果
         System.out.println(res);
     }
 
