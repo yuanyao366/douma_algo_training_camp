@@ -1,6 +1,7 @@
 public:
     vector<int> singleNumber(vector<int>& nums) {
         // 把所有的元素进行异或操作，最终得到一个异或值。因为是不同的两个数字，所以这个值必定不为 0；
+        // 使用无符号整数的原因：防止 -(INT_MIN) 越界
         unsigned int bitmask = 0;
         for (int num : nums) bitmask ^= num;
 

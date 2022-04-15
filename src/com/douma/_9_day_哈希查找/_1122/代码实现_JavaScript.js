@@ -28,7 +28,12 @@ var relativeSortArray = function(arr1, arr2) {
         for (let i = 0; i < count[num]; i++) {
             arr1[index++] = num
         }
+        // 清 0 的原因：
+        // 在 arr1 中等于 num 的所有的元素都放在一起了
+        // 也就是 num 排好序了，为了可以区分出已经排好序，和还没排序的元素
+        // 我们将排好序的元素出现的次数清 0
         count[num] = 0
+        // 清 0 后，在下面的循环中就不用处理了，下面的循环只要处理在 arr2 中没出现的元素了
     }
 
     for (let num = 0; num < count.length; num++) {
