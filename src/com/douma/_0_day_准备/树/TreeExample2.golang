@@ -78,26 +78,26 @@ func main() {
     data := strings.Split(line, ",")
     n := len(data)
     // 1. 构造一棵树
-    nodes := make([]TreeNode, n)
+    nodes := make([]*TreeNode, n)
 
     for i := 0; i < n; i++ {
         if "null" != data[i] {
             v, _ := strconv.Atoi(data[i])
             node := TreeNode{v, nil, nil}
-            nodes[i] = node
+            nodes[i] = &node
         }
     }
 
     for i := 0; i * 2 + 2 < n; i++ {
-        nodes[i].Left = &nodes[2 * i + 1];
-        nodes[i].Right = &nodes[2 * i + 2];
+        nodes[i].Left = nodes[2 * i + 1];
+        nodes[i].Right = nodes[2 * i + 2];
     }
 
     // 2. 拿到树的根节点
     root := nodes[0]
 
     // 3. 判断这棵树是否是二叉查找树
-    res := isValidBST(&root)
+    res := isValidBST(root)
 
     // 4. 打印结果
     fmt.Println(res)
