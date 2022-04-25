@@ -4,6 +4,10 @@
 #include <algorithm>
 using namespace std;
 
+// c++ 自定义排序的规则
+// 比较 a 和 b：
+// 如果想升序，那么就定义当 a < b 的时候返回 true
+// 如果想降序，那么就定义当 a > b 的时候返回 true
 bool cmp0(const pair<string, int> &a,const pair<string, int> &b) {
     return a.second > b.second;
 }
