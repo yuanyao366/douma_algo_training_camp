@@ -9,7 +9,7 @@ package com.douma._27_day_动态规划二.knapsack;
  */
 public class _9_KnapsackComplete {
 
-    public int knapsack01(int[] w, int[] v, int C) {
+    public int knapsackComplete(int[] w, int[] v, int C) {
         // 1. 状态定义：dp[c] : 将物品放入容量为 c 的背包中产生的最大价值
         int[] dp = new int[C + 1];
 
@@ -17,6 +17,8 @@ public class _9_KnapsackComplete {
 
         // 3. 状态转移
         for (int i = 0; i < w.length; i++) {
+            // 注意：这里和 01 背包还是有区别的
+            // 01 背包在遍历容量的时候是从右往左遍历，而完全背包是从左往右遍历的
             for (int c = w[i]; c <= C; c++) {
                 // 放 第一个物品产生的价值永远大于等于放 第 2、3、4、5.... 个
                 // 如果放第一个物品产生的价值比不放这个物品产生的价值要小的话
@@ -34,6 +36,6 @@ public class _9_KnapsackComplete {
         int w[] = {3, 4, 5, 2};
         int v[] = {15, 10, 12, 8};
 
-        System.out.println(k.knapsack01(w, v, 10));
+        System.out.println(k.knapsackComplete(w, v, 10));
     }
 }

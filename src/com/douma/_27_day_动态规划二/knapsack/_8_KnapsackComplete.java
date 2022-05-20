@@ -9,7 +9,7 @@ package com.douma._27_day_动态规划二.knapsack;
  */
 public class _8_KnapsackComplete {
 
-    public int knapsack01(int[] w, int[] v, int C) {
+    public int knapsackComplete(int[] w, int[] v, int C) {
         // 1. 状态定义：dp[c] : 将物品放入容量为 c 的背包中产生的最大价值
         int[] dp = new int[C + 1];
 
@@ -38,6 +38,6 @@ public class _8_KnapsackComplete {
         int w[] = {3, 4, 5, 2};
         int v[] = {15, 10, 12, 8};
 
-        System.out.println(k.knapsack01(w, v, 10));
+        System.out.println(k.knapsackComplete(w, v, 10));
     }
 }

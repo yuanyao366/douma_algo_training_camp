@@ -21,7 +21,7 @@ public class _6_KnapsackComplete {
 
     private int max = 0;
 
-    public int knapsack01(int[] w, int[] v, int C) {
+    public int knapsackComplete(int[] w, int[] v, int C) {
         this.w = w;
         this.v = v;
         return dfs(-1, C);
@@ -52,7 +52,7 @@ public class _6_KnapsackComplete {
         int w[] = {3, 4, 5};
         int v[] = {15, 10, 12};
 
-        System.out.println(k.knapsack01(w, v, 10));
+        System.out.println(k.knapsackComplete(w, v, 10));
     }
 
     // 完全背包回溯法也可以这样来实现

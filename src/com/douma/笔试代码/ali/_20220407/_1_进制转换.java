@@ -18,10 +18,11 @@ public class _1_进制转换 {
 
         Map<Character, Integer> map = new HashMap<>();
         map.put('A', 10);
-        map.put('B', 10);
-        map.put('C', 10);
-        map.put('D', 10);
-        map.put('E', 10);
+        map.put('B', 11);
+        map.put('C', 12);
+        map.put('D', 13);
+        map.put('E', 14);
+        map.put('E', 15);
 
         Scanner scanner = new Scanner(System.in);
         String numStr = scanner.next();
