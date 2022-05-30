@@ -1,6 +1,9 @@
 package com.douma;
 
 import java.io.*;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * @微信公众号 : 抖码课堂
@@ -93,6 +96,20 @@ public class Test {
     public static void main(String[] args) throws IOException {
         int[] nums = {1, 2, 5, 4, 5, 7, 4};
         System.out.println(maxLen(nums));
+
+        ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+        ReentrantReadWriteLock.WriteLock wl = lock.writeLock();
+        ReentrantReadWriteLock.ReadLock rl = lock.readLock();
+
+        wl.lock();
+
+
+        rl.lock();
+        rl.lock();
+        rl.lock();
+        rl.unlock();
+
+
     }
 
     private static void f(File file) throws IOException {
@@ -111,5 +128,7 @@ public class Test {
             File[] files = file.listFiles();
             for (File f : files) f(f);
         }
+
+
     }
 }

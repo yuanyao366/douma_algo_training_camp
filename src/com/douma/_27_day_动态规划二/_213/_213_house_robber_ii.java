@@ -61,5 +61,28 @@ public class _213_house_robber_ii {
         return currMax;
     }
 
+    // 状态没压缩的代码
+    public int rob2(int[] nums, int start, int end) {
+        if (end - start + 1 == 1) return nums[start];
+
+        // dp[i]：表示偷盗 [0, i] 区间房子得到的最大金额
+        int[] dp = new int[nums.length];
+
+        dp[start] = nums[start];
+        dp[start + 1] = Math.max(nums[start], nums[start + 1]);
+
+        for (int i = start + 2; i <= end; i++) {
+            dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i]);
+        }
+
+        return dp[end];
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 3};
+        int res = new _213_house_robber_ii().rob(nums);
+        System.out.println(res);
+    }
+
 
 }
