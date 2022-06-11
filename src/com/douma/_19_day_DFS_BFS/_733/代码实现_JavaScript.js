@@ -23,7 +23,7 @@ var floodFill1 = function(image, sr, sc, newColor) {
 
         image[row][col] = newColor
 
-        for (let dir of dirs) {
+        for (const dir of dirs) {
             const nextRow = row + dir[0]
             const nextCol = col + dir[1]
             dfs(nextRow, nextCol)
