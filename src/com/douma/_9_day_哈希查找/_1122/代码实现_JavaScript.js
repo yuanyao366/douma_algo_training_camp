@@ -12,6 +12,7 @@ var relativeSortArray1 = function(arr1, arr2) {
         map.set(arr2[i], i)
     }
     */
+    // 这个是函数式编程。forEach 中，可以接收一个函数，这个函数的输入参数有两个，一个是数组中每个元素值，第二个是这个元素对应的索引
     arr2.forEach((num, i) => map.set(num, i))
 
     arr1.sort((x, y) => {

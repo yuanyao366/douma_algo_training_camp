@@ -68,8 +68,15 @@ public class _1122_relative_sort_array {
             @Override
             public int compare(Integer x, Integer y) {
                 if (map.containsKey(x)) {
+                    // 如果 x 和 y 都出现在两个数组中，那么返回 x 和 y 在 arr2 索引的差
+                    //      如果差等于 0，那么 x 和 y 在 arr1 的顺序不变
+                    //      如果差等于负数，那么说明在 arr2 中， x 在 y 的前面，那么在 arr1 中， x 和 y 就升序排列(即 x 在 y 前面)
+                    //      如果差等于正数，那么说明在 arr2 中， x 在 y 的后面，那么在 arr1 中， x 和 y 就降序排列(即 y 在 x 的前面)
+                    // 如果 x 在 arr2 中，但是 y 不在 arr2 中，那么返回负数 (-1)，那么 x 和 y 在 arr1 中升序排列(即 x 在 y 前面)
                     return map.containsKey(y) ? map.get(x) - map.get(y) : -1;
                 } else {
+                    // 如果 x 不在 arr2 中，但是 y 在 arr2 中，那么返回正数(即 1)，那么 x 和 y 在 arr1 中降序排列(即 y 在 x 的前面)
+                    // 如果 x 和 y 都在 arr2 中，那么 x 和 y 就按照 x 和 y 的大小进行升序排列
                     return map.containsKey(y) ? 1 : x - y;
                 }
             }
