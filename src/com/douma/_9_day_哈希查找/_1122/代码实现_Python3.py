@@ -1,3 +1,4 @@
+import functools
 from typing import List
 
 
@@ -9,6 +10,28 @@ class Solution:
             return (0, num_index_map[x]) if x in num_index_map else (1, x)
 
         arr1.sort(key=mycmp)
+        return arr1
+
+    # 下面这个解法来源于算法学员 TT
+    def relativeSortArray2(arr1: List[int], arr2: List[int]) -> List[int]:
+        num_index_map = {x: i for i, x in enumerate(arr2)}
+        print(num_index_map)
+
+        def mycmp(x, y):
+            # 总体上这里需要比较x,y在map中的索引 谁的索引小 谁在前面
+            # 但这里不是所有元素都会在map里
+            if x in num_index_map:
+                if y in num_index_map:  # x在map里 y在map里的情况 按照索引进行升序排列
+                    return num_index_map.get(x) - num_index_map.get(y)
+                else:  # x在map里 y不在的情况
+                    return -1  # x放前面
+            else:
+                if y in num_index_map:  # x不在map里 y在map里的情况
+                    return 1  # y放前面
+                else:  # x不在map里 y不在map里的情况
+                    return x - y  # x,y进行升序比较
+
+        arr1 = sorted(arr1, key=functools.cmp_to_key(mycmp))
         return arr1
 
     def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
@@ -32,3 +55,5 @@ class Solution:
                 ans.extend([num] * count[num])
 
         return ans
+
+
