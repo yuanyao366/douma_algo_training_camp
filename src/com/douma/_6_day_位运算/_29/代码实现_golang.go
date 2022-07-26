@@ -78,37 +78,47 @@ func divide2(a int, b int) int {
 
 // 时间复杂度：O(1)
 func divide(a int, b int) int {
-    if (a == INT_MIN && b == -1) return INT_MAX;
+    if a == math.MinInt32 && b == -1 {
+        return math.MaxInt32
+    }
+    res := 0
 
-    int res = 0;
     // 处理边界，防止转正数溢出
     // 除数绝对值最大，结果必为 0 或 1
-    if (b == INT_MIN) {
-        return a == b? 1 : 0;
+    if b == math.MinInt32 {
+        if a == b {
+            return 1
+        } else {
+            return 0
+        }
     }
 
     // 被除数先减去一个除数
-    if (a == INT_MIN) {
+    if (a == math.MinInt32) {
         a -= -abs(b);
         res += 1;
     }
 
-    int sign = (a > 0) ^ (b > 0) ? -1 : 1;
+    sign := 1
+    if (a > 0 && b < 0) || (a < 0 && b > 0) {
+        sign = -1
+    }
 
-    int ua = abs(a);
-    int ub = abs(b);
-    for (int i = 31; i >= 0; i--) {
-        if ((ua >> i) >= ub) {
-            ua = ua - (ub << i);
+    a = abs(a)
+    b = abs(b)
+
+
+    for i := 31; i >= 0; i-- {
+        if (a >> i) - b >= 0 {
+            a = a - (b << i)
             // 代码优化：这里控制 ans 大于等于 INT_MAX
-            if (res > INT_MAX - (1 << i)) {
-                return INT_MIN;
+            if res > math.MaxInt32 - (1 << i) {
+                return math.MinInt32;
             }
-            res += 1 << i;
+            res += 1 << i
         }
     }
-    // bug 修复：因为不能使用乘号，所以将乘号换成三目运算符
-    return sign == 1 ? res : -res;
+    return sign * res
 }
 
 func abs(a int) int {
