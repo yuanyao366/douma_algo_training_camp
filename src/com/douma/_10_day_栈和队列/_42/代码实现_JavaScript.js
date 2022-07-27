@@ -10,13 +10,15 @@ var trap1 = function(height) {
     leftMax = new Array(n).fill(0)
     leftMax[0] = height[0]
     for (let i = 1; i < n; i++) {
-        leftMax[i] = Math.max(leftMax[i - 1], height[i])
+        // 计算第 i 根柱子的前面所有柱子的最大值
+        leftMax[i] = Math.max(leftMax[i - 1], height[i - 1])
     }
 
     rightMax = new Array(n).fill(0)
     rightMax[n - 1] = height[n - 1]
     for (let i = n - 2; i >= 0; i--) {
-        rightMax[i] = Math.max(rightMax[i + 1], height[i])
+        // 计算第 i 根柱子的后面所有柱子的最大值
+        rightMax[i] = Math.max(rightMax[i + 1], height[i + 1])
     }
 
     let ans = 0
